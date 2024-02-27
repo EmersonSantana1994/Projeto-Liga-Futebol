@@ -36,7 +36,18 @@ module.exports = {
 
     deleteTimeSorteado: (dados) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('DELETE FROM times_sorteados WHERE (id IN (?))', [dados.id], (error, results) => {
+            db.query('DELETE FROM times_sorteados WHERE id <> 0001', [], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);    
+            });
+        });
+    },
+
+    deletar: (dados) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('DELETE FROM torneio WHERE id <> 0001', [], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
@@ -46,6 +57,7 @@ module.exports = {
     },
 
     atualizaTime: (dados) => {
+        console.log("uuuuuuu", dados)
         return new Promise((aceito, rejeitado)=>{
             db.query('UPDATE torneio SET pontos = ?, saldo = ? WHERE (id = ?)', [dados.pontos, dados.saldo, dados.id], (error, results) => {
                 if(error) { 
@@ -91,7 +103,7 @@ module.exports = {
 
     buscarPlacares: (dados) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('Select * from resultados WHERE id IN (?)', [dados.id], (error, results) => {
+            db.query('Select * from resultados', [dados.id], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
@@ -100,6 +112,17 @@ module.exports = {
         });
     },
 
+    deletarPlacar:(dados) => {
+        console.log("dadossssssssss", dados)
+        return new Promise((aceito, rejeitado)=>{
+            db.query('UPDATE resultados SET resultado = NULL, data = NULL WHERE id IN (?)', [dados.id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
 
     cadastrarTimeSorteado: (dados) => {
         return new Promise((aceito, rejeitado)=>{
@@ -146,6 +169,15 @@ module.exports = {
     bucarTimeSorteados: (nome) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('SELECT * FROM times_sorteados', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+                    aceito(results);
+            })
+        });
+    },
+
+    timeSorteado: (dados) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT * FROM times_sorteados where nome IN (?)', [dados.nome], (error, results) => {
                 if(error) { rejeitado(error); return; }
                     aceito(results);
             })

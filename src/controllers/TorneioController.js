@@ -42,6 +42,17 @@ module.exports = {
             return res.json(json)
     },
 
+    async deletar(req, res) {
+        let json = { error: '', result: {} };
+
+        let dados = {id: req.body.id}
+            let inserir = await TorneioModel.deletar(dados);
+            if (inserir) {  
+                json.result = inserir; //se tiver nota ele joga no json
+            }
+            return res.json(json)
+    },
+
     async cadastrarTime(req, res) {
         let json = { error: '', result: {} };
 
@@ -76,6 +87,18 @@ module.exports = {
     },
 
 
+    async timeSorteado(req, res) {
+        let json = { error: '', result: {} };
+        let dados = {nome: req.body.nome }
+        let futebol = await TorneioModel.timeSorteado();
+        if (futebol) {
+            json.result = futebol; //se tiver nota ele joga no json
+        }
+
+        return res.json(json.result)
+    },
+
+    
     async bucarTimeSorteados(req, res) {
         let json = { error: '', result: {} };
         let futebol = await TorneioModel.bucarTimeSorteados();
@@ -135,6 +158,16 @@ module.exports = {
 
         let dados = {id: req.body.id}
             let inserir = await TorneioModel.buscarPlacares(dados);
+            if (inserir) {  
+                json.result = inserir; //se tiver nota ele joga no json
+            }
+            return res.json(json)
+    },
+
+    async deletarPlacar(req, res){
+        let json = { error: '', result: {} };
+        let dados = {id: req.body.id}
+        let inserir = await TorneioModel.deletarPlacar(dados);
             if (inserir) {  
                 json.result = inserir; //se tiver nota ele joga no json
             }

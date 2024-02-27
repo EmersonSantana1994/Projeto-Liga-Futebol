@@ -38,12 +38,15 @@ router.post('/torneio/deletarTimeSorteado', TorneioController.deleteTimeSorteado
 router.post('/torneio/cadastrarTime', TorneioController.cadastrarTime);
 router.post('/torneio/bucarNome', TorneioController.bucarNome);
 router.post('/torneio/buscarTimeSorteado', TorneioController.bucarTimeSorteados);
+router.post('/torneio/bucarTimeSorteados', TorneioController.timeSorteado);
 router.put('/torneio/atualizaTime', TorneioController.atualizaTime);
 router.put('/torneio/atualizaTimeSorteado', TorneioController.atualizaTimeSorteado);
 router.post('/torneio/cadastrarTimeSorteado', TorneioController.cadastrarTimeSorteado);
 router.post('/torneio/salvarPlacar', TorneioController.salvarPlacar);
 router.post('/torneio/buscarPlacar', TorneioController.buscarPlacar);
 router.post('/torneio/buscarPlacares', TorneioController.buscarPlacares);
+router.post('/torneio/deletarPlacar', TorneioController.deletarPlacar);
+router.post('/torneio/deletar', TorneioController.deletar);
 
 //RankingJogadores
 router.post('/rankingJogadores/encontrar/nome', RanckingJogadoresController.buscarNome);
@@ -57,8 +60,8 @@ router.post('/ranking/buscar', RankingMundialClubesController.buscarTodos);
 router.post('/ranking/inserir', RankingMundialClubesController.inserirPontos);
 router.put('/ranking/atualiza', RankingMundialClubesController.atualizaPontos);
 
-//FileFire
-
+//Transferencia
+router.post('/transferencia/jogador', );
 
 
 module.exports = router;
