@@ -9,7 +9,10 @@ const ArtilheiroControler = require('./controllers/ArtilheiroControler');
 const TorneioController = require('./controllers/TorneioController');
 const RanckingJogadoresController = require('./controllers/RanckingJogadoresController');
 const RankingMundialClubesController = require('./controllers/RankingMundialClubesController');
-
+const TransferenciaController = require('./controllers/TransferenciaController');
+const CadastrarController = require('./controllers/CadastrarController');
+const ListarLigasTimesController = require('./controllers/ListarLigasTimesController');
+const ListarTimesJogadoresController = require('./controllers/ListarTimesJogadoresController');
 
 router.use(
     express.urlencoded({
@@ -61,7 +64,19 @@ router.post('/ranking/inserir', RankingMundialClubesController.inserirPontos);
 router.put('/ranking/atualiza', RankingMundialClubesController.atualizaPontos);
 
 //Transferencia
-router.post('/transferencia/jogador', );
+router.post('/transferencia/jogador', TransferenciaController.tranferirJogador );
+router.post('/transferencia/jogadorComprado', TransferenciaController.tranferirJogadorComprado );
+router.post('/transferencia/bucarTimeAtualizado', TransferenciaController.bucarTimeAtualizado );
 
+//Cadastrar
+router.post('/cadastrar/time', CadastrarController.cadastrarTime );
+router.post('/cadastrar/jogador', CadastrarController.cadastrarJogador );
 
+//Listar Times e Ligas
+router.post('/listar/ligas', ListarLigasTimesController.buscarTodos );
+router.post('/listar/times', ListarLigasTimesController.buscarTodosTimes );
+
+//Listar Times e jogadores
+router.post('/listar/time', ListarTimesJogadoresController.buscarTodos );
+router.post('/listar/jogadores', ListarTimesJogadoresController.buscarTodosTimes );
 module.exports = router;
