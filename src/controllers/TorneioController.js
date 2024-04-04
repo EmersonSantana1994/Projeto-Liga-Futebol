@@ -4,22 +4,24 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const TorneioModel = require('../services/TorneioModel');
 const SECRET = 'emesantana'
+let cript = false
 
-function verifyJWT(req, res, next){
-    let resp
+async function verifyJWT(req, res, next){
+    cript = false
     const token = req.headers['x-access-token'];
     jwt.verify(token, SECRET, (err, decoded) =>{
         if(err){
-            resp = true
-           } else{
-            req.userId = decoded.userId;
-            resp = false
-           } 
+            cript = true
+            return 'não autenticado'
+        } 
+        req.userId = decoded.userId;
+        // next();
     })
-    return resp
+    
     }
 
 module.exports = {
+    
     async buscarTodos(req, res, next) {
     //   let autenticar = verifyJWT(req, res)
     //   if(autenticar){

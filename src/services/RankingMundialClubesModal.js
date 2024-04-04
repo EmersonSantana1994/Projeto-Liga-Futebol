@@ -89,6 +89,17 @@ module.exports = {
         });
     },
 
+    deletar: (id, nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('DELETE FROM ranking_clubes WHERE id <> 99999999', [], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);    
+            });
+        });
+    },
+
     buscarUsuario: (user) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('select * from tb_usuario where usuario = ?', [user], (error, results) => {

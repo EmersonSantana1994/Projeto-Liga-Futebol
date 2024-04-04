@@ -3,14 +3,20 @@ const ArtilheiroModel = require('../services/ArtilheiroModel');
 const jwt = require('jsonwebtoken')
 const SECRET = 'emesantana'
 const axios = require('axios');
+let cript = false
 
-function verifyJWT(req, res, next){
+async function verifyJWT(req, res, next){
+    cript = false
     const token = req.headers['x-access-token'];
     jwt.verify(token, SECRET, (err, decoded) =>{
-        if(err){return res.status(500).send('sem autenticacao');} 
+        if(err){
+            cript = true
+            return 'não autenticado'
+        } 
         req.userId = decoded.userId;
         // next();
     })
+    
     }
 
 
@@ -106,7 +112,6 @@ module.exports = {
 
 
     async cadastrar(req, res) {
-        
         let json = { error: '', result: {} };
 
         let codigo = req.body;

@@ -4,19 +4,10 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const SECRET = 'emesantana'
 
-function verifyJWT(req, res, next){
-    const token = req.headers['x-access-token'];
-    jwt.verify(token, SECRET, (err, decoded) =>{
-        if(err){return res.status(500).send('sem autenticacao');} 
-        req.userId = decoded.userId;
-        // next();
-    })
-    
-    }
+
 
 module.exports = {
     async buscarTodos(req, res) {
-        verifyJWT(req, res)
         console.log(req.userId + 'fez esta chamada')
         let json = { error: '', result: [] };
         let futebol = await LoginModel.buscarTodos();
@@ -45,7 +36,7 @@ module.exports = {
 
 
     async cadastrar(req, res) {
-        
+        console.log("cadastrarrrrr")
         let json = { error: '', result: {} };
 
         let codigo = req.body;
@@ -66,10 +57,12 @@ module.exports = {
 
     async login(req, res) {
         let json = { error: '', result: {} };
+        console.log("ppppp", req.body)
         let buscarUsuario = await LoginModel.buscarUsuario(req.body.usuario);
         if (buscarUsuario != 'atencao' && buscarUsuario) {
             if (await bcrypt.compare(req.body.senha, buscarUsuario[0].senha)) {
-             const token =  jwt.sign({userId: 1}, SECRET, {expiresIn: "1 days"})
+            //  const token =  jwt.sign({userId: 1}, SECRET, {expiresIn: "1 days"})
+            const token =  jwt.sign({userId: 1}, SECRET, {expiresIn: 18000})
              return res.json({auth: true, token})
                 // return res.status(200).send('Você esta logado!')
             }else{

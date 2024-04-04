@@ -69,4 +69,93 @@ module.exports = {
         });
     },
 
+    alterarNome: (id, nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('UPDATE jogadores SET nome = ? WHERE (id_jogador = ?)', [nome, id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+
+
+    deletarNome: (id, nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('DELETE FROM jogadores WHERE id_jogador = ?', [id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);    
+            });
+        });
+    },
+
+    alterarNomeTime: (id, nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('UPDATE times_tb SET nome = ? WHERE (id_time = ?)', [nome, id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+
+
+    deletarNomeTime: (id, nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('DELETE FROM times_tb WHERE id_time = ?', [id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);    
+            });
+        });
+    },
+
+    alterarNomeLiga: (id, nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('UPDATE ligas SET nome = ? WHERE (id = ?)', [nome, id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+
+
+    deletarNomeLiga: (id, nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('DELETE FROM ligas WHERE id = ?', [id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);    
+            });
+        });
+    },
+
+    pesquisarTime: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('select * from times_tb WHERE nome = ?', [nome], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+    pesquisarJogadores: (id) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('select * from jogadores WHERE id_time = ?', [id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
     };

@@ -5,11 +5,16 @@ const jwt = require('jsonwebtoken');
 const TorneioModel = require('../services/TorneioModel');
 const RanckingJogadoresModal = require('../services/RanckingJogadoresModal');
 const SECRET = 'emesantana'
+let cript = false
 
-function verifyJWT(req, res, next){
+async function verifyJWT(req, res, next){
+    cript = false
     const token = req.headers['x-access-token'];
     jwt.verify(token, SECRET, (err, decoded) =>{
-        if(err){return res.status(500).send('sem autenticacao');} 
+        if(err){
+            cript = true
+            return 'não autenticado'
+        } 
         req.userId = decoded.userId;
         // next();
     })
@@ -18,7 +23,6 @@ function verifyJWT(req, res, next){
 
 module.exports = {
     async buscarTodos(req, res) {
-        // verifyJWT(req, res)
         let json = { error: '', result: [] };
         let futebol = await RanckingJogadoresModal.buscarTodos();
             json.result = futebol
@@ -137,6 +141,13 @@ module.exports = {
             }
             return res.json(json)
     },
+
+    async deletar(req, res) {
+        let json = { error: '', result: {} };
+            await RanckingJogadoresModal.deletar();
+            return res.json(json)
+    },
+
 
     async cadastrar(req, res) {
         

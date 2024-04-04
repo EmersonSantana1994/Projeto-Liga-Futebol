@@ -4,11 +4,13 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const TorneioModel = require('../services/TorneioModel');
 const ListarLigasTimesModal = require('../services/ListarLigasTimesModal');
+const CriarTabelasModal = require('../services/CriarTabelasModal');
 const SECRET = 'emesantana'
 let cript = false
 
 async function verifyJWT(req, res, next){
     cript = false
+    console.log("ddddddddd", req.headers['x-access-token']  )
     const token = req.headers['x-access-token'];
     jwt.verify(token, SECRET, (err, decoded) =>{
         if(err){
@@ -23,21 +25,20 @@ async function verifyJWT(req, res, next){
 
 
 module.exports = {
-    async buscarTodos(req, res) {
-        // verifyJWT(req, res)
+    async criarTabelas(req, res) {
         let json = { error: '', result: [] };
-        let futebol = await ListarLigasTimesModal.buscarTodos();
-            json.result = futebol
-        return res.json(json.result)
-    },
-
-    async buscarTodosTimes(req, res) {
-        // verifyJWT(req, res)
-        let json = { error: '', result: [] };
-        let dados = { pontos: req.body.pontos, nome: req.body.nome  }
-            let futebol = await ListarLigasTimesModal.buscarLiga(req.body.liga);
-          let times =  await ListarLigasTimesModal.buscarTimes(futebol[0].id);
-            json.result = times
+        await CriarTabelasModal.artilheiro();
+        await CriarTabelasModal.ranking_clubes();
+        await CriarTabelasModal.ranking_jogadores();
+        await CriarTabelasModal.resultados();
+        await CriarTabelasModal.tb_usuario();
+        await CriarTabelasModal.times_sorteados();
+        await CriarTabelasModal.torneio();
+        await CriarTabelasModal.users();
+        await CriarTabelasModal.ligas();
+        await CriarTabelasModal.times_tb();
+        await CriarTabelasModal.jogadores();
+        await CriarTabelasModal.pontos_troneio();
         return res.json(json.result)
     },
 }

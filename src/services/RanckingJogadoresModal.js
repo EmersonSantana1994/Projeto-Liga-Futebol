@@ -21,6 +21,17 @@ module.exports = {
         });
     },
 
+    deletar: (id, nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('DELETE FROM ranking_jogadores WHERE id <> 99999999', [], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);    
+            });
+        });
+    },
+
     atualizaPontos: (dados) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('UPDATE ranking_jogadores SET pontos = ? WHERE (id = ?)', [dados.pontos, dados.id], (error, results) => {

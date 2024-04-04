@@ -4,7 +4,21 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const TorneioModel = require('../services/TorneioModel');
 const SECRET = 'emesantana'
+let cript = false
 
+async function verifyJWT(req, res, next){
+    cript = false
+    const token = req.headers['x-access-token'];
+    jwt.verify(token, SECRET, (err, decoded) =>{
+        if(err){
+            cript = true
+            return 'não autenticado'
+        } 
+        req.userId = decoded.userId;
+        // next();
+    })
+    
+    }
 
 module.exports = {
 

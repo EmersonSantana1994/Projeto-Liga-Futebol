@@ -4,7 +4,22 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const TorneioModel = require('../services/TorneioModel');
 const SECRET = 'emesantana'
+let cript = false
 
+
+async function verifyJWT(req, res, next){
+    cript = false
+    const token = req.headers['x-access-token'];
+    jwt.verify(token, SECRET, (err, decoded) =>{
+        if(err){
+            cript = true
+            return 'não autenticado'
+        } 
+        req.userId = decoded.userId;
+        // next();
+    })
+    
+    }
 
 module.exports = {
 
@@ -69,5 +84,56 @@ module.exports = {
         return res.json(json)
     },
 
+    async alterarNome(req, res, next) {
+        let json = { error: '', result: [] };
 
+        await CadastrarModel.alterarNome(req.body.id, req.body.nome);
+        return res.json(json)
+    },
+
+    async deletarNome(req, res, next) {
+        let json = { error: '', result: [] };
+
+        await CadastrarModel.deletarNome(req.body.id);
+        return res.json(json)
+    },
+
+    async alterarNomeTime(req, res, next) {
+        let json = { error: '', result: [] };
+
+        await CadastrarModel.alterarNomeTime(req.body.id, req.body.nome);
+        return res.json(json)
+    },
+
+    async deletarNomeTime(req, res, next) {
+        let json = { error: '', result: [] };
+
+        await CadastrarModel.deletarNomeTime(req.body.id);
+        return res.json(json)
+    },
+
+    async alterarNomeLiga(req, res, next) {
+        let json = { error: '', result: [] };
+
+        await CadastrarModel.alterarNomeLiga(req.body.id, req.body.nome);
+        return res.json(json)
+    },
+
+    async deletarNomeLiga(req, res, next) {
+        let json = { error: '', result: [] };
+
+        await CadastrarModel.deletarNomeLiga(req.body.id);
+        return res.json(json)
+    },
+
+    async pesquisarTime(req, res, next) {
+        let json = { error: '', result: [] };
+      let inserir =  await CadastrarModel.pesquisarTime(req.body.time);
+
+        if (inserir.length != 0) {
+            let inserir2 =  await CadastrarModel.pesquisarJogadores(inserir[0].id_time);
+            json.result = inserir2; //se tiver nota ele joga no json
+        } 
+        return res.json(json)
+    }
 }
