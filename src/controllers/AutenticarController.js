@@ -10,7 +10,6 @@ let cript = false
 async function verifyJWT(req, res, next){
     cript = false
     const token = req.headers['x-access-token'];
-    console.log("ddddddddd", req.headers['x-access-token']  )
     jwt.verify(token, SECRET, (err, decoded) =>{
         if(err){
             cript = true
@@ -25,6 +24,7 @@ async function verifyJWT(req, res, next){
 module.exports = {
 
     async autenticar(req, res) {
+        console.log("oooppopopo22222")
         await  verifyJWT(req, res)
         if(cript){
           return res.status(500).send('não autenticado')

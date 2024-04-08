@@ -10,7 +10,6 @@ let cript = false
 
 async function verifyJWT(req, res, next){
     cript = false
-    console.log("ddddddddd", req.headers['x-access-token']  )
     const token = req.headers['x-access-token'];
     jwt.verify(token, SECRET, (err, decoded) =>{
         if(err){
