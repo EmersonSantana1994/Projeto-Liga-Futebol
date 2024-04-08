@@ -84,7 +84,7 @@ module.exports = {
     
     ligas: (nome) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('CREATE TABLE IF NOT EXISTS ligas(id bigint AUTO_INCREMENT, nome varchar(255), PRIMARY KEY (id));', [], (error, results) => {
+            db.query('CREATE TABLE IF NOT EXISTS ligas(id bigint unsigned not null AUTO_INCREMENT, nome varchar(255), PRIMARY KEY (id));', [], (error, results) => {
                 if(error) { rejeitado(error); return; }
                //vai verificar se retornou mais de 1 e pegar o 1
                     aceito(results);    
@@ -104,7 +104,7 @@ module.exports = {
     
     jogadores: (nome) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('CREATE TABLE IF NOT EXISTS jogadores(id_jogador bigint AUTO_INCREMENT, nome varchar(255), id_time int unsigned not null,index jg_tm_index(id_time), foreign key (id_jogador) references times_tb(id_time) on delete cascade, PRIMARYKEY(id_jogador));', [], (error, results) => {
+            db.query('CREATE TABLE IF NOT EXISTS jogadores(id_jogador bigint unsigned not null AUTO_INCREMENT, nome varchar(255), id_time int unsigned not null,index jg_tm_index(id_time), foreign key (id_jogador) references times_tb(id_time) on delete cascade, PRIMARYKEY(id_jogador));', [], (error, results) => {
                 if(error) { rejeitado(error); return; }
                //vai verificar se retornou mais de 1 e pegar o 1
                     aceito(results);    
