@@ -47,7 +47,7 @@ module.exports = {
 
     cadastrarTime: (nome, id) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('INSERT INTO times_tb (nome, id) VALUES (?,?)', [nome, id], (error, results) => {
+            db.query('INSERT INTO times_tb (nome, id_liga) VALUES (?,?)', [nome, id], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }

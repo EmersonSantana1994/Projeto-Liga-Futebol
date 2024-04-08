@@ -21,7 +21,7 @@ module.exports = {
     },
     buscarTimes: (id) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('SELECT * FROM times_tb WHERE id IN(?) ', [id], (error, results) => {
+            db.query('SELECT * FROM times_tb WHERE id_liga IN(?) ', [id], (error, results) => {
                 if(error) { rejeitado(error); return; }
                //vai verificar se retornou mais de 1 e pegar o 1
                     aceito(results);    
