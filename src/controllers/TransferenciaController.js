@@ -33,7 +33,8 @@ module.exports = {
             let idTime = await TransferenciaModel.buscarTime(req.body.nomeTime);
             let idJogadorSaindo = await TransferenciaModel.buscarNomeJogador(req.body.jogadorSaindo);
             let idJogadorEntrando = await TransferenciaModel.buscarNomeJogador(req.body.novoJogador);
-            await TransferenciaModel.jogadorSaindo(idJogadorSaindo[0].id_jogador);
+            let buscarIdSemTime = await TransferenciaModel.buscarIdSemTime();
+            await TransferenciaModel.jogadorSaindo(idJogadorSaindo[0].id_jogador, buscarIdSemTime[0].id_time);
             if(idJogadorEntrando[0] == undefined || idJogadorEntrando[0] == "undefined"){
                inserir =  await TransferenciaModel.cadastrarJogador(req.body.novoJogador, idTime[0].id_time);
             }else{

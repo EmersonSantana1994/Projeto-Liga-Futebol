@@ -121,5 +121,57 @@ module.exports = {
             })
         });
     },
+
+    verificarSeTemSemLiga: () => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('Select * from ligas where nome = "Sem liga";', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
+    verificarSeTemSemTime: () => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('Select * from times_tb where nome = "Sem time";', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
+    semLiga: () => {
+        return new Promise((aceito, rejeitado)=>{
+            console.log("iiuiuiuiuiuiu")
+            db.query('INSERT INTO ligas (nome) VALUES ("Sem liga");', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
+    buscarIdsemLiga: () => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('Select id from ligas where nome = "Sem liga";', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+    
+    semTime: (id) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('INSERT INTO times_tb (nome, id_liga) VALUES ("Sem time", ?);', [id], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+    
    
     };

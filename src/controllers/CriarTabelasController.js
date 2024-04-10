@@ -38,6 +38,13 @@ module.exports = {
         await CriarTabelasModal.times_tb();
         await CriarTabelasModal.jogadores();
         await CriarTabelasModal.pontos_troneio();
+        // let verificarSeTemSemLiga = await CriarTabelasModal.verificarSeTemSemLiga();
+        // console.log("rrrrrrr", verificarSeTemSemLiga.length)
+        // if(verificarSeTemSemLiga.length == 0 ){
+        //     await CriarTabelasModal.semLiga();    
+        //     let buscarId = await CriarTabelasModal.buscarIdsemLiga();
+        //     await CriarTabelasModal.semTime(buscarId[0]);
+        // }
         return res.json(json.result)
     },
 }

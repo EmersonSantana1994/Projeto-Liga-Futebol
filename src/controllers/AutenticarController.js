@@ -24,7 +24,6 @@ async function verifyJWT(req, res, next){
 module.exports = {
 
     async autenticar(req, res) {
-        console.log("oooppopopo22222")
         await  verifyJWT(req, res)
         if(cript){
           return res.status(500).send('não autenticado')

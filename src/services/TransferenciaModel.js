@@ -21,7 +21,16 @@ module.exports = {
             })
         });
     },
-
+    
+    buscarIdSemTime: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT id_time FROM times_tb WHERE nome IN("Sem time") ', [nome], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);
+            })
+        });
+    },
 
     cadastrarJogador: (novoJogador, time) => {
         return new Promise((aceito, rejeitado)=>{
@@ -35,9 +44,9 @@ module.exports = {
         });
     },
 
-    jogadorSaindo: (dados) => {
+    jogadorSaindo: (id_jogador, id_time) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('UPDATE jogadores SET id_time = ? WHERE (id_jogador = ?)', ["36", dados ], (error, results) => {
+            db.query('UPDATE jogadores SET id_time = ? WHERE (id_jogador = ?)', [id_time, id_jogador ], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
