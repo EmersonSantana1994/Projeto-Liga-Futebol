@@ -30,6 +30,14 @@ module.exports = {
         return res.json(json.result)
     },
 
+    async buscarJogador(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let todosArtilheiro = await ArtilheiroModel.buscarJogador(req.body.nome);
+            json.result = todosArtilheiro
+        return res.json(json.result)
+    },
+
 
     async  teste(req, res) {
 
@@ -66,14 +74,20 @@ module.exports = {
         },
 
     async inserirPontos(req, res) {
+        let inserir 
         let json = { error: '', result: {} };
 
         let dados = { gols: req.body.gols, nome: req.body.nome  }
-            let inserir = await ArtilheiroModel.inserirPontos(dados);
+        let buscarIdJogador =  await ArtilheiroModel.buscarJogadorTabela(req.body.nome);
+        if(buscarIdJogador.length == 0){
+            return res.status(500).send('Jogador não cadastrado na tebla de jogadores')
+        }else{
+            inserir = await ArtilheiroModel.inserirPontos(dados, buscarIdJogador[0].id_jogador);
             if (inserir) {
                 json.result = inserir; //se tiver nota ele joga no json
             }
             return res.json(json)
+        }
     },
 
     async atualizaPontos(req, res) {

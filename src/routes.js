@@ -16,6 +16,7 @@ const CriarTabelasController = require('./controllers/CriarTabelasController');
 const ListarTimesJogadoresController = require('./controllers/ListarTimesJogadoresController');
 const PontosTorneioController = require('./controllers/PontosTorneioController');
 const AutenticarController = require('./controllers/AutenticarController');
+const ListarTudoController = require('./controllers/ListarTudoController');
 
 router.use(
     express.urlencoded({
@@ -33,6 +34,7 @@ router.post('/usuarios/logar', LoginController.login);
 router.post('/usuarios/logar', LoginController.login);
 
 //Artilheiro
+router.post('/artilheiro/nome', ArtilheiroControler.buscarJogador);
 router.post('/artilheiro/buscar', ArtilheiroControler.buscarTodos);
 router.post('/artilheiro/inserir', ArtilheiroControler.inserirPontos);
 router.put('/artilheiro/atualiza', ArtilheiroControler.atualizaPontos);
@@ -94,6 +96,9 @@ router.post('/listar/jogadores', ListarTimesJogadoresController.buscarTodosTimes
 
 //Criar tabelas
 router.post('/criar/tabelas', CriarTabelasController.criarTabelas );
+
+//Listar tudo
+router.post('/listar/todos', ListarTudoController.listarTudo );
 
 //Pontos de torneio
 router.post('/pontos_torneio/listar_torneio', PontosTorneioController.listar_torneio );

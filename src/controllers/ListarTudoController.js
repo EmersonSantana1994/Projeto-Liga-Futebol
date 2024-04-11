@@ -3,7 +3,7 @@ const LoginModel = require('../services/LoginModel');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const TorneioModel = require('../services/TorneioModel');
-const ListarTimesJogadoresModal = require('../services/ListarTimesJogadoresModal');
+const ListarTimesJogadoresModal = require('../services/ListarTudoModal');
 const SECRET = 'emesantana'
 
 function verifyJWT(req, res, next){
@@ -17,22 +17,11 @@ function verifyJWT(req, res, next){
     }
 
 module.exports = {
-
-    async buscarTodos(req, res) {
+    async listarTudo(req, res) {
         // verifyJWT(req, res)
         let json = { error: '', result: [] };
-        let futebol = await ListarTimesJogadoresModal.buscarTodos();
+        let futebol = await ListarTimesJogadoresModal.listarTudo();
             json.result = futebol
-        return res.json(json.result)
-    },
-
-    async buscarTodosTimes(req, res) {
-        // verifyJWT(req, res)
-        let json = { error: '', result: [] };
-        let dados = { pontos: req.body.pontos, nome: req.body.nome  }
-            let futebol = await ListarTimesJogadoresModal.buscarTime(req.body.time);
-          let jogadores =  await ListarTimesJogadoresModal.buscarJogadores(futebol[0].id_time);
-            json.result = jogadores
         return res.json(json.result)
     },
 }

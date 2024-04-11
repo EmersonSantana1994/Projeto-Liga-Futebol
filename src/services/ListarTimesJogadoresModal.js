@@ -1,6 +1,7 @@
 const db = require('../db');
 
 module.exports = {
+
     buscarTodos: (nome) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('SELECT * FROM times_tb Where nome <> "Sem time" ', (error, results) => {

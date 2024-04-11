@@ -10,9 +10,29 @@ module.exports = {
         });
     },
 
-    inserirPontos: (dados) => {
+    buscarJogador: (nome) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('INSERT INTO artilheiro (gols, nome) VALUES (?,?)', [dados.gols, dados.nome], (error, results) => {
+            db.query('SELECT * FROM artilheiro Where (nome = ?) ', [nome], (error, results)=>{
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+
+    buscarJogadorTabela: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT * FROM jogadores Where (nome = ?)', [nome], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+
+    inserirPontos: (dados, id) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('INSERT INTO artilheiro (gols, nome, id_jogador) VALUES (?,?,?)', [dados.gols, dados.nome, id], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }

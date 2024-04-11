@@ -112,6 +112,7 @@ module.exports = {
         });
     },
 
+
     pontos_troneio: (nome) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('CREATE TABLE IF NOT EXISTS pontos_troneio(id bigint AUTO_INCREMENT, nome varchar(255), pontos bigint, PRIMARY KEY (id));', [], (error, results) => {
@@ -142,16 +143,15 @@ module.exports = {
         });
     },
 
-    semLiga: () => {
-        return new Promise((aceito, rejeitado)=>{
-            console.log("iiuiuiuiuiuiu")
-            db.query('INSERT INTO ligas (nome) VALUES ("Sem liga");', [], (error, results) => {
-                if(error) { rejeitado(error); return; }
-               //vai verificar se retornou mais de 1 e pegar o 1
-                    aceito(results);    
-            })
-        });
-    },
+    // semLiga: () => {
+    //     return new Promise((aceito, rejeitado)=>{
+    //         db.query('INSERT INTO ligas (nome) VALUES ("Sem liga");', [], (error, results) => {
+    //             if(error) { rejeitado(error); return; }
+    //            //vai verificar se retornou mais de 1 e pegar o 1
+    //                 aceito(results);    
+    //         })
+    //     });
+    // },
 
     buscarIdsemLiga: () => {
         return new Promise((aceito, rejeitado)=>{
@@ -163,15 +163,20 @@ module.exports = {
         });
     },
     
-    semTime: (id) => {
-        return new Promise((aceito, rejeitado)=>{
-            db.query('INSERT INTO times_tb (nome, id_liga) VALUES ("Sem time", ?);', [id], (error, results) => {
-                if(error) { rejeitado(error); return; }
-               //vai verificar se retornou mais de 1 e pegar o 1
-                    aceito(results);    
-            })
-        });
-    },
+    // semTime: (id) => {
+    //     return new Promise((aceito, rejeitado)=>{
+    //         db.query('INSERT INTO times_tb (nome, id_liga) VALUES ("Sem time", ?);', [id], (error, results) => {
+    //             if(error) { rejeitado(error); return; }
+    //            //vai verificar se retornou mais de 1 e pegar o 1
+    //                 aceito(results);    
+    //         })
+    //     });
+    // },
     
    
+//ABAIXO mostra como adicionar uma coluna na tabela e referenciala 
+
+    //ALTER TABLE artilheiro ADD COLUMN id_jogador bigint unsigned not null, ADD foreign key (id_jogador) references jogadores(id_jogador) on delete cascade;
+
+
     };
