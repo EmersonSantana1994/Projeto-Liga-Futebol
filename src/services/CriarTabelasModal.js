@@ -1,16 +1,6 @@
 const db = require('../db');
 
 module.exports = {
-
-    artilheiro: (nome) => {
-        return new Promise((aceito, rejeitado)=>{
-            db.query('CREATE TABLE IF NOT EXISTS artilheiro(id bigint AUTO_INCREMENT, gols bigint, nome varchar(255), PRIMARY KEY (id));', [], (error, results) => {
-                if(error) { rejeitado(error); return; }
-               //vai verificar se retornou mais de 1 e pegar o 1
-                    aceito(results);    
-            })
-        });
-    },
     
     ranking_clubes: (nome) => {
         return new Promise((aceito, rejeitado)=>{
@@ -136,6 +126,16 @@ module.exports = {
     verificarSeTemSemTime: () => {
         return new Promise((aceito, rejeitado)=>{
             db.query('Select * from times_tb where nome = "Sem time";', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
+    artilheiro: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('CREATE TABLE IF NOT EXISTS artilheiro(id bigint AUTO_INCREMENT, gols bigint, nome varchar(255), id_jogador bigint unsigned not null, index ar_jg_index(id_jogador), foreign key (id_jogador) references jogadores(id_jogador) on delete cascade, PRIMARY KEY (id));', [], (error, results) => {
                 if(error) { rejeitado(error); return; }
                //vai verificar se retornou mais de 1 e pegar o 1
                     aceito(results);    
