@@ -24,7 +24,7 @@ module.exports = {
     
     resultados: (nome) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('CREATE TABLE IF NOT EXISTS resultados(id bigint AUTO_INCREMENT, resultado varchar(100), data timestamp, PRIMARY KEY (id));', [], (error, results) => {
+            db.query('CREATE TABLE IF NOT EXISTS resultados(id bigint AUTO_INCREMENT, resultado varchar(100), data DATETIME ON UPDATE CURRENT_TIMESTAMP, PRIMARY KEY (id));', [], (error, results) => {
                 if(error) { rejeitado(error); return; }
                //vai verificar se retornou mais de 1 e pegar o 1
                     aceito(results);    
@@ -143,6 +143,145 @@ module.exports = {
         });
     },
 
+    verificarResultados: () => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('Select * from resultados where id > 0;', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
+
+    
+    salvarIdResultados: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
+    
+
     // semLiga: () => {
     //     return new Promise((aceito, rejeitado)=>{
     //         db.query('INSERT INTO ligas (nome) VALUES ("Sem liga");', [], (error, results) => {
@@ -178,5 +317,16 @@ module.exports = {
 
     //ALTER TABLE artilheiro ADD COLUMN id_jogador bigint unsigned not null, ADD foreign key (id_jogador) references jogadores(id_jogador) on delete cascade;
 
+
+//ABAIXO mostrar como criar uma tabela onde a data é inserida automaticamente quando é feito um insert
+
+//CREATE TABLE IF NOT EXISTS resultados(id bigint AUTO_INCREMENT, resultado varchar(100), data DATETIME DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id));
+
+
+//ABAIXO mostrar como criar uma tabela onde a data é inserida automaticamente quando é feito um update
+
+// CREATE TABLE IF NOT EXISTS resultados(id bigint AUTO_INCREMENT, resultado varchar(100), data DATETIME ON UPDATE CURRENT_TIMESTAMP, PRIMARY KEY (id));
+
+//
 
     };

@@ -36,7 +36,7 @@ module.exports = {
 
     deleteTimeSorteado: (dados) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('DELETE FROM times_sorteados WHERE id <> 0001', [], (error, results) => {
+            db.query('DELETE FROM times_sorteados WHERE id <> 0', [], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
@@ -47,7 +47,7 @@ module.exports = {
 
     deletar: (dados) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('DELETE FROM torneio WHERE id <> 0001', [], (error, results) => {
+            db.query('DELETE FROM torneio WHERE id <> 0', [], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
@@ -57,7 +57,6 @@ module.exports = {
     },
 
     atualizaTime: (dados) => {
-        console.log("uuuuuuu", dados)
         return new Promise((aceito, rejeitado)=>{
             db.query('UPDATE torneio SET pontos = ?, saldo = ? WHERE (id = ?)', [dados.pontos, dados.saldo, dados.id], (error, results) => {
                 if(error) { 
@@ -113,7 +112,6 @@ module.exports = {
     },
 
     deletarPlacar:(dados) => {
-        console.log("dadossssssssss", dados)
         return new Promise((aceito, rejeitado)=>{
             db.query('UPDATE resultados SET resultado = NULL, data = NULL WHERE id IN (?)', [dados.id], (error, results) => {
                 if(error) { 
@@ -159,6 +157,16 @@ module.exports = {
     bucarNome: (nome) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('SELECT * FROM torneio WHERE nome IN(?) ', [nome], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);
+            });
+        });
+    },
+
+    verificar: () => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT * FROM resultados', [], (error, results) => {
                 if(error) { rejeitado(error); return; }
                //vai verificar se retornou mais de 1 e pegar o 1
                     aceito(results);

@@ -23,7 +23,7 @@ module.exports = {
 
     deletar: (id, nome) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('DELETE FROM ranking_jogadores WHERE id <> 99999999', [], (error, results) => {
+            db.query('DELETE FROM ranking_jogadores WHERE id <> 0', [], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }

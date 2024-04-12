@@ -88,6 +88,15 @@ module.exports = {
         return res.json(json.result)
     },
 
+    async verificar(req, res) {
+        let json = { error: '', result: {} };
+        let futebol = await TorneioModel.verificar();
+        if (futebol) {
+            json.result = futebol; //se tiver nota ele joga no json
+        }
+        return res.json(json.result)
+    },
+
 
     async timeSorteado(req, res) {
         let json = { error: '', result: {} };

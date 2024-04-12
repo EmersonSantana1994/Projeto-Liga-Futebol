@@ -45,6 +45,7 @@ router.post('/torneio/buscar', TorneioController.buscarTodos);
 router.post('/torneio/deletarTimeSorteado', TorneioController.deleteTimeSorteado);
 router.post('/torneio/cadastrarTime', TorneioController.cadastrarTime);
 router.post('/torneio/bucarNome', TorneioController.bucarNome);
+router.post('/torneio/verificar', TorneioController.verificar);
 router.post('/torneio/buscarTimeSorteado', TorneioController.bucarTimeSorteados);
 router.post('/torneio/bucarTimeSorteados', TorneioController.timeSorteado);
 router.put('/torneio/atualizaTime', TorneioController.atualizaTime);
@@ -111,3 +112,6 @@ router.post('/pontos_torneio/deletar', PontosTorneioController.deletar );
 //Autenticar
 router.post('/autenticacao/autenticar', AutenticarController.autenticar );
 module.exports = router;
+
+
+

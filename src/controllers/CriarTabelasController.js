@@ -21,7 +21,7 @@ async function verifyJWT(req, res, next){
     })
     
     }
-
+   
 
 module.exports = {
     async criarTabelas(req, res) {
@@ -38,6 +38,11 @@ module.exports = {
         await CriarTabelasModal.jogadores();
         await CriarTabelasModal.pontos_troneio();
         await CriarTabelasModal.artilheiro();
+     let verifica =   await CriarTabelasModal.verificarResultados();
+     if(verifica.length == 0 ){
+        await CriarTabelasModal.salvarIdResultados();
+     }
+       
         // let verificarSeTemSemLiga = await CriarTabelasModal.verificarSeTemSemLiga();
         // console.log("rrrrrrr", verificarSeTemSemLiga.length)
         // if(verificarSeTemSemLiga.length == 0 ){
