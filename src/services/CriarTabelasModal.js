@@ -94,7 +94,7 @@ module.exports = {
     
     jogadores: (nome) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('CREATE TABLE IF NOT EXISTS jogadores(id_jogador bigint unsigned not null AUTO_INCREMENT, nome varchar(255), id_time bigint unsigned not null, index jg_tm_index(id_time), foreign key (id_time) references times_tb(id_time) on delete cascade, PRIMARY KEY (id_jogador));', [], (error, results) => {
+            db.query('CREATE TABLE IF NOT EXISTS jogadores(id_jogador bigint unsigned not null AUTO_INCREMENT, nome varchar(255), pais varchar(100), posicao varchar(100), foto longblob, id_time bigint unsigned not null, index jg_tm_index(id_time), foreign key (id_time) references times_tb(id_time) on delete cascade, PRIMARY KEY (id_jogador));', [], (error, results) => {
                 if(error) { rejeitado(error); return; }
                //vai verificar se retornou mais de 1 e pegar o 1
                     aceito(results);    
@@ -313,7 +313,7 @@ module.exports = {
     // },
     
    
-//ABAIXO mostra como adicionar uma coluna na tabela e referenciala 
+//ABAIXO mostra como adicionar uma coluna na tabela e referenciala com outra tabela
 
     //ALTER TABLE artilheiro ADD COLUMN id_jogador bigint unsigned not null, ADD foreign key (id_jogador) references jogadores(id_jogador) on delete cascade;
 

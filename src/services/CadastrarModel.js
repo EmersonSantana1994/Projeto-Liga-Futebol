@@ -158,4 +158,36 @@ module.exports = {
             });
         });
     },
+
+    verificarSeTemImagem: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('select * foto WHERE nome = ?', [nome], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+    inserirImagem: (foto, id) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('UPDATE jogadores SET foto = ? WHERE (id_jogador = ?)', [foto, id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+
+    buscarImagem: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT foto FROM jogadores Where (nome = ?)', [nome], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
     };

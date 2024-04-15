@@ -30,6 +30,7 @@ module.exports = {
         });
     },
 
+
     inserirPontos: (dados, id) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('INSERT INTO artilheiro (gols, nome, id_jogador) VALUES (?,?,?)', [dados.gols, dados.nome, id], (error, results) => {

@@ -8,7 +8,6 @@ const SECRET = 'emesantana'
 
 module.exports = {
     async buscarTodos(req, res) {
-        console.log(req.userId + 'fez esta chamada')
         let json = { error: '', result: [] };
         let futebol = await LoginModel.buscarTodos();
 
@@ -36,7 +35,6 @@ module.exports = {
 
 
     async cadastrar(req, res) {
-        console.log("cadastrarrrrr")
         let json = { error: '', result: {} };
 
         let codigo = req.body;
@@ -57,7 +55,6 @@ module.exports = {
 
     async login(req, res) {
         let json = { error: '', result: {} };
-        console.log("ppppp", req.body)
         let buscarUsuario = await LoginModel.buscarUsuario(req.body.usuario);
         if (buscarUsuario != 'atencao' && buscarUsuario) {
             if (await bcrypt.compare(req.body.senha, buscarUsuario[0].senha)) {

@@ -58,7 +58,6 @@ module.exports = {
     },
 
     alterar_pontos: (id, pontos) => {
-        console.log("pontossssssssssss", pontos)
         return new Promise((aceito, rejeitado)=>{
             db.query('UPDATE pontos_troneio SET pontos = ? WHERE (id = ?)', [pontos, id], (error, results) => {
                 if(error) { 

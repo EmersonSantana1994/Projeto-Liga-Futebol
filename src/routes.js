@@ -24,7 +24,7 @@ router.use(
     })
 )
 
-router.use(express.json())
+router.use(express.json({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 
 //Login
 router.post('/buscarTodos', LoginController.buscarTodos);
@@ -86,6 +86,8 @@ router.post('/cadastrar/deletarNomeTime', CadastrarController.deletarNomeTime );
 router.post('/cadastrar/alterarNomeLiga', CadastrarController.alterarNomeLiga );
 router.post('/cadastrar/deletarNomeLiga', CadastrarController.deletarNomeLiga );
 router.post('/cadastrar/pesquisar', CadastrarController.pesquisarTime );
+router.post('/inserir/imagem', CadastrarController.inserirImagem );   
+router.post('/buscar/imagem', CadastrarController.buscarImagem );    
 
 //Listar Times e Ligas
 router.post('/listar/ligas', ListarLigasTimesController.buscarTodos );

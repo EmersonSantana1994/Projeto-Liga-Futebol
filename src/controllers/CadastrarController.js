@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const TorneioModel = require('../services/TorneioModel');
 const SECRET = 'emesantana'
+const ArtilheiroModel = require('../services/ArtilheiroModel');
 let cript = false
 
 
@@ -36,16 +37,12 @@ module.exports = {
 
         let json = { error: '', result: [] };
         let seExisteLiga = await CadastrarModel.seExisteLiga(req.body.liga);
-        console.log("seExisteLiga", seExisteLiga)
         if (seExisteLiga[0] == undefined || seExisteLiga[0] == "undefined") {
             cadastrarLiga = await CadastrarModel.cadastrarLiga(req.body.liga);
-            console.log("cadastrarLiga", cadastrarLiga.insertId)
             let arrayTime = []
             arrayTime.push(req.body.time1, req.body.time2, req.body.time3, req.body.time4)
             let seExisteTimes = await CadastrarModel.seExisteTime(arrayTime);
-            console.log("testeeeee 1", seExisteTimes)
             if (seExisteTimes[0] == undefined || seExisteTimes[0] == "undefined") {
-                console.log("testeeeee 2")
                 cadastrarTime1 = await CadastrarModel.cadastrarTime(req.body.time1, cadastrarLiga.insertId);
                 cadastrarTime2 = await CadastrarModel.cadastrarTime(req.body.time2, cadastrarLiga.insertId);
                 cadastrarTime3 = await CadastrarModel.cadastrarTime(req.body.time3, cadastrarLiga.insertId);
@@ -69,9 +66,6 @@ module.exports = {
         let seExisteTime = await CadastrarModel.seExisteTime(req.body.time);
         if(seExisteTime.length > 0 || seExisteTime.length > 0){
             let seExisteJogador = await CadastrarModel.seExisteJogador(arrayJogador);
-            console.log("seExisteJogador", seExisteJogador.length)
-            console.log("seExisteTime 222", seExisteTime)
-            console.log("seExisteTime", seExisteTime.length)
             if (seExisteJogador.length == 0) {
                await CadastrarModel.cadastrarJogador(req.body.jogador1, seExisteTime[0].id_time);
                await CadastrarModel.cadastrarJogador(req.body.jogador2, seExisteTime[0].id_time);
@@ -135,5 +129,32 @@ module.exports = {
             json.result = inserir2; //se tiver nota ele joga no json
         } 
         return res.json(json)
+    },
+    async inserirImagem(req, res, next) {
+        let json = { error: '', result: [] };
+        let buscarIdJogador =  await ArtilheiroModel.buscarJogadorTabela(req.body.nome);
+        if(buscarIdJogador.length == 0){
+            return res.status(500).send('Jogador não cadastrado na tabela de jogadores')
+        }else{
+            inserir = await CadastrarModel.inserirImagem(req.body.imagem, buscarIdJogador[0].id_jogador);
+            if (inserir) {
+                json.result = inserir; //se tiver nota ele joga no json
+            }
+            return res.json(json)
+        }
+    },
+
+    async buscarImagem(req, res, next) {
+        let json = { error: '', result: [] };
+        let buscarIdJogador =  await ArtilheiroModel.buscarJogadorTabela(req.body.nome);
+        if(buscarIdJogador.length == 0){
+            return res.status(500).send('Jogador não cadastrado na tabela de jogadores')
+        }else{
+            inserir = await CadastrarModel.buscarImagem(req.body.nome);
+            if (inserir) {
+                json.result = inserir[0].foto; //se tiver nota ele joga no json
+            }
+            return res.json(json)
+        }
     }
 }
