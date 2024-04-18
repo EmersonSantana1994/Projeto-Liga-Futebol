@@ -143,6 +143,16 @@ module.exports = {
         });
     },
 
+    artilheiroTorneio: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('CREATE TABLE IF NOT EXISTS artilheiro_torneio(id bigint AUTO_INCREMENT, gols bigint, nome varchar(255), PRIMARY KEY (id));', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
     verificarResultados: () => {
         return new Promise((aceito, rejeitado)=>{
             db.query('Select * from resultados where id > 0;', [], (error, results) => {

@@ -14,6 +14,13 @@ const connection = mysql.createConnection({
     database: 'bancodeteste'
 });
 
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '123456Ee#',
+//     database: 'homol'
+// });
+
 
 connection.connect((error)=>{
     if(error) throw error;

@@ -38,6 +38,7 @@ module.exports = {
         await CriarTabelasModal.jogadores();
         await CriarTabelasModal.pontos_troneio();
         await CriarTabelasModal.artilheiro();
+        await CriarTabelasModal.artilheiroTorneio();
      let verifica =   await CriarTabelasModal.verificarResultados();
      if(verifica.length == 0 ){
         await CriarTabelasModal.salvarIdResultados();

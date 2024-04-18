@@ -36,9 +36,11 @@ router.post('/usuarios/logar', LoginController.login);
 //Artilheiro
 router.post('/artilheiro/nome', ArtilheiroControler.buscarJogador);
 router.post('/artilheiro/buscar', ArtilheiroControler.buscarTodos);
+router.post('/artilheiro/buscar/torneio', ArtilheiroControler.buscarTodosTorneio);
 router.post('/artilheiro/inserir', ArtilheiroControler.inserirPontos);
 router.put('/artilheiro/atualiza', ArtilheiroControler.atualizaPontos);
 router.post('/artilheiro/delete', ArtilheiroControler.deleteJogador);
+router.post('/artilheiro/delete/torneio', ArtilheiroControler.deleteJogadorTorneio);
 
 //Torneio
 router.post('/torneio/buscar', TorneioController.buscarTodos);

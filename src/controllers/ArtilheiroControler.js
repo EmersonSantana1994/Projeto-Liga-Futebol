@@ -38,6 +38,14 @@ module.exports = {
         return res.json(json.result)
     },
 
+    async buscarTodosTorneio(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let todosArtilheiro = await ArtilheiroModel.buscarTodosTorneio();
+            json.result = todosArtilheiro
+        return res.json(json.result)
+    },
+
 
     async  teste(req, res) {
 
@@ -83,6 +91,7 @@ module.exports = {
             return res.status(500).send('Jogador não cadastrado na tebla de jogadores')
         }else{
             inserir = await ArtilheiroModel.inserirPontos(dados, buscarIdJogador[0].id_jogador);
+            await ArtilheiroModel.inserirPontosTorneio(dados);
             if (inserir) {
                 json.result = inserir; //se tiver nota ele joga no json
             }
@@ -95,6 +104,14 @@ module.exports = {
 
         let dados = {id: req.body.id, gols: req.body.gols, nome: req.body.nome  }
             let inserir = await ArtilheiroModel.atualizaPontos(dados);
+            let buscarJogadorTorneio = await ArtilheiroModel.buscarJogadorTorneio(req.body.nome);
+            if(buscarJogadorTorneio.length > 0){
+             let atualiza =  req.body.gols_torneio + buscarJogadorTorneio[0].gols  
+                await ArtilheiroModel.atualizaPontosToneio(dados, atualiza);
+            }else{
+                await ArtilheiroModel.inserirPontosTorneio(dados, req.body.gols_torneio);
+            }
+            
             if (inserir) {  
                 json.result = inserir; //se tiver nota ele joga no json
             }
@@ -106,6 +123,17 @@ module.exports = {
 
         let dados = {id: req.body.id}
             let inserir = await ArtilheiroModel.deleteJogador(dados);
+            if (inserir) {  
+                json.result = inserir; //se tiver nota ele joga no json
+            }
+            return res.json(json)
+    },
+
+    async deleteJogadorTorneio(req, res) {
+        let json = { error: '', result: {} };
+
+        let dados = {id: req.body.id}
+            let inserir = await ArtilheiroModel.deleteJogadorTorneio(dados);
             if (inserir) {  
                 json.result = inserir; //se tiver nota ele joga no json
             }

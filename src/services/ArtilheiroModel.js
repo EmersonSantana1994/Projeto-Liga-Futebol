@@ -10,9 +10,27 @@ module.exports = {
         });
     },
 
+    buscarTodosTorneio: () => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT * FROM artilheiro_torneio ORDER BY gols Desc', (error, results)=>{
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+
     buscarJogador: (nome) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('SELECT * FROM artilheiro Where (nome = ?) ', [nome], (error, results)=>{
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+
+    buscarJogadorTorneio: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT * FROM artilheiro_torneio Where (nome = ?) ', [nome], (error, results)=>{
                 if(error) { rejeitado(error); return; }
                 aceito(results);
             });
@@ -42,6 +60,17 @@ module.exports = {
         });
     },
 
+    inserirPontosTorneio: (dados, gols) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('INSERT INTO artilheiro_torneio (gols, nome) VALUES (?,?)', [gols, dados.nome], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+
     atualizaPontos: (dados) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('UPDATE artilheiro SET gols = ? WHERE (id = ?)', [dados.gols, dados.id], (error, results) => {
@@ -53,9 +82,31 @@ module.exports = {
         });
     },
 
+    atualizaPontosToneio: (dados, gols) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('UPDATE artilheiro_torneio SET gols = ? WHERE (nome = ?)', [gols, dados.nome], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+
     deleteJogador: (dados) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('DELETE FROM artilheiro WHERE (id IN (?))', [dados.id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);    
+            });
+        });
+    },
+
+    deleteJogadorTorneio: (dados) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('DELETE FROM artilheiro_torneio WHERE (id IN (?))', [dados.id], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }

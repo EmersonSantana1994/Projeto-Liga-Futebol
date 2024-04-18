@@ -18,11 +18,11 @@ server.use('', routes);
 // }, null, true, 'America/Sao_Paulo')
 
 
-// server.listen(process.env.PORT,()=>{
-//     console.log(`Servidor rodando em: http://localhost:${process.env.PORT}`);
-// });
+server.listen(process.env.PORT,()=>{
+    console.log(`Servidor rodando em: http://localhost:${process.env.PORT}`);
+});
 
-https.createServer({
-    cert: fs.readFileSync('src/SSL/code.crt'),
-    key: fs.readFileSync('src/SSL/code.key')
-}, server).listen(3001, ()=> console.log("ta rodando aqui na https") )
+// https.createServer({
+//     cert: fs.readFileSync('src/SSL/code.crt'),
+//     key: fs.readFileSync('src/SSL/code.key')
+// }, server).listen(3001, ()=> console.log("ta rodando aqui na https") )
