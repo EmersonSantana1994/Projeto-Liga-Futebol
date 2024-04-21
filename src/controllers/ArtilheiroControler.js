@@ -91,7 +91,7 @@ module.exports = {
             return res.status(500).send('Jogador não cadastrado na tebla de jogadores')
         }else{
             inserir = await ArtilheiroModel.inserirPontos(dados, buscarIdJogador[0].id_jogador);
-            await ArtilheiroModel.inserirPontosTorneio(dados);
+            await ArtilheiroModel.inserirPontosTorneio(dados, req.body.gols );
             if (inserir) {
                 json.result = inserir; //se tiver nota ele joga no json
             }
