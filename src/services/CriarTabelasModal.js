@@ -153,6 +153,26 @@ module.exports = {
         });
     },
 
+    placares_copa: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('CREATE TABLE IF NOT EXISTS resultados_copa(id bigint AUTO_INCREMENT, nome varchar(200), placar bigint, fase varchar(200), data DATETIME ON UPDATE CURRENT_TIMESTAMP, PRIMARY KEY (id));', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
+    times_copa: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('CREATE TABLE IF NOT EXISTS times_copa(id bigint AUTO_INCREMENT, nome varchar(200), PRIMARY KEY (id));', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
     verificarResultados: () => {
         return new Promise((aceito, rejeitado)=>{
             db.query('Select * from resultados where id > 0;', [], (error, results) => {
@@ -163,9 +183,19 @@ module.exports = {
         });
     },
 
+    verificarResultadosCopa: () => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('Select * from resultados_copa where id > 0;', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
 
     
-    salvarIdResultados: (nome) => {
+    salvarIdResultados: () => {
         return new Promise((aceito, rejeitado)=>{
             db.query('INSERT INTO `bancodeteste`.`resultados` (resultado, data ) VALUES (null, null);', [], (error, results) => {
                 if(error) { rejeitado(error); return; }
@@ -290,17 +320,153 @@ module.exports = {
         });
     },
 
-    
+    salvarIdResultadosCopa: () => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
 
-    // semLiga: () => {
-    //     return new Promise((aceito, rejeitado)=>{
-    //         db.query('INSERT INTO ligas (nome) VALUES ("Sem liga");', [], (error, results) => {
-    //             if(error) { rejeitado(error); return; }
-    //            //vai verificar se retornou mais de 1 e pegar o 1
-    //                 aceito(results);    
-    //         })
-    //     });
-    // },
+        });
+        
+    },
+
 
     buscarIdsemLiga: () => {
         return new Promise((aceito, rejeitado)=>{

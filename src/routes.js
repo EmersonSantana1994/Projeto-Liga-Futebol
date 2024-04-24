@@ -17,6 +17,7 @@ const ListarTimesJogadoresController = require('./controllers/ListarTimesJogador
 const PontosTorneioController = require('./controllers/PontosTorneioController');
 const AutenticarController = require('./controllers/AutenticarController');
 const ListarTudoController = require('./controllers/ListarTudoController');
+const CopaCotroller = require('./controllers/CopaController');
 
 router.use(
     express.urlencoded({
@@ -112,6 +113,12 @@ router.post('/pontos_torneio/alterar_nome_pontos', PontosTorneioController.alter
 router.post('/pontos_torneio/alterar_nome', PontosTorneioController.alterar_nome );
 router.post('/pontos_torneio/alterar_pontos', PontosTorneioController.alterar_pontos );
 router.post('/pontos_torneio/deletar', PontosTorneioController.deletar );
+
+//Copa
+router.post('/copa/bucartodos', CopaCotroller.buscarTodos );
+router.post('/copa/bucartodos_placar', CopaCotroller.buscarTodosPlacares );
+router.post('/copa/cadastrarTime', CopaCotroller.cadastrarTime );
+router.post('/copa/cadastrar_placar', CopaCotroller.cadastrar_placar );
 
 //Autenticar
 router.post('/autenticacao/autenticar', AutenticarController.autenticar );

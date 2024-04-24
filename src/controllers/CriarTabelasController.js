@@ -39,9 +39,15 @@ module.exports = {
         await CriarTabelasModal.pontos_troneio();
         await CriarTabelasModal.artilheiro();
         await CriarTabelasModal.artilheiroTorneio();
+        await CriarTabelasModal.placares_copa();
+        await CriarTabelasModal.times_copa();
      let verifica =   await CriarTabelasModal.verificarResultados();
      if(verifica.length == 0 ){
         await CriarTabelasModal.salvarIdResultados();
+     }
+     let verificaCopa =   await CriarTabelasModal.verificarResultadosCopa();
+     if(verificaCopa.length == 0 ){
+        await CriarTabelasModal.salvarIdResultadosCopa();
      }
        
         // let verificarSeTemSemLiga = await CriarTabelasModal.verificarSeTemSemLiga();
