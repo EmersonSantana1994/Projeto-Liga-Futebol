@@ -21,9 +21,10 @@ module.exports = {
         });
     },
 
-    cadastrarTime: (dados) => {
+    cadastrarTime: (nome) => {
+        console.log("")
         return new Promise((aceito, rejeitado)=>{
-            db.query('INSERT INTO times_copa (nome) VALUES (?)', [dados.nome], (error, results) => {
+            db.query('INSERT INTO times_copa (nome) VALUES (?)', [nome], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }

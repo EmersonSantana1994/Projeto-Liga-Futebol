@@ -29,12 +29,16 @@ module.exports = {
     async cadastrarTime(req, res) {
         let json = { error: '', result: {} };
 
-        let dados = { nome: req.body.nome}
-            let inserir = await CopaModal.cadastrarTime(dados);
+        for (let j = 0; j < req.body.tamanho; j++) {
+            let inserir = await CopaModal.cadastrarTime(req.body.nome[j] );
             if (inserir) {
                 json.result = inserir; //se tiver nota ele joga no json
             }
-            return res.json(json)
+            
+        }
+        return res.json(json)
+       
+           
     },
 
     async cadastrar_placar(req, res) {
