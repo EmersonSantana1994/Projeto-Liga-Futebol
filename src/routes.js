@@ -119,6 +119,7 @@ router.post('/copa/bucartodos', CopaCotroller.buscarTodos );
 router.post('/copa/bucartodos_placar', CopaCotroller.buscarTodosPlacares );
 router.post('/copa/cadastrarTime', CopaCotroller.cadastrarTime );
 router.post('/copa/cadastrar_placar', CopaCotroller.cadastrar_placar );
+router.post('/copa/limpar', CopaCotroller.limpar );
 
 //Autenticar
 router.post('/autenticacao/autenticar', AutenticarController.autenticar );

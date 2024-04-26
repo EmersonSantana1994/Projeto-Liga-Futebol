@@ -54,4 +54,14 @@ module.exports = {
             return res.json(json)
     },
 
+    async limpar(req, res) {
+        let json = { error: '', result: {} };
+            let inserir1 = await CopaModal.limpar(req.body.placar1, req.body.id1 );
+            if(inserir1){
+                    json.result = inserir1; //se tiver nota ele joga no json     
+            }
+           
+            return res.json(json)
+    },
+
 }

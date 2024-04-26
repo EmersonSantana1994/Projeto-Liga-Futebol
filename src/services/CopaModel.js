@@ -43,4 +43,21 @@ module.exports = {
             });
         });
     },
+
+    limpar: (placar, id) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('UPDATE resultados_copa SET placar = null, data = null WHERE (id <> 0);', [placar, id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+            db.query('DELETE FROM times_copa WHERE (id <> 0);', [placar, id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
 }
