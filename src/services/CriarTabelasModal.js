@@ -173,6 +173,16 @@ module.exports = {
         });
     },
 
+    placar_jogo: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('CREATE TABLE IF NOT EXISTS placar_jogo(id bigint AUTO_INCREMENT, nome varchar(100), placar int, PRIMARY KEY (id));;', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
     verificarResultados: () => {
         return new Promise((aceito, rejeitado)=>{
             db.query('Select * from resultados where id > 0;', [], (error, results) => {
