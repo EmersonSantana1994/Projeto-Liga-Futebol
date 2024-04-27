@@ -18,6 +18,7 @@ const PontosTorneioController = require('./controllers/PontosTorneioController')
 const AutenticarController = require('./controllers/AutenticarController');
 const ListarTudoController = require('./controllers/ListarTudoController');
 const CopaCotroller = require('./controllers/CopaController');
+const PlacarController = require('./controllers/PlacarController');
 
 router.use(
     express.urlencoded({
@@ -120,6 +121,11 @@ router.post('/copa/bucartodos_placar', CopaCotroller.buscarTodosPlacares );
 router.post('/copa/cadastrarTime', CopaCotroller.cadastrarTime );
 router.post('/copa/cadastrar_placar', CopaCotroller.cadastrar_placar );
 router.post('/copa/limpar', CopaCotroller.limpar );
+
+//Placar
+router.post('/placar/inserir', PlacarController.inserir );
+router.post('/placar/bucartodos', PlacarController.buscarTodos );
+router.post('/placar/limpar', PlacarController.limpar );
 
 //Autenticar
 router.post('/autenticacao/autenticar', AutenticarController.autenticar );

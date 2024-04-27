@@ -106,7 +106,7 @@ module.exports = {
 
     deleteJogadorTorneio: (dados) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('DELETE FROM artilheiro_torneio WHERE (id IN (?))', [dados.id], (error, results) => {
+            db.query('DELETE FROM artilheiro_torneio WHERE (id <> 0)', [], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
