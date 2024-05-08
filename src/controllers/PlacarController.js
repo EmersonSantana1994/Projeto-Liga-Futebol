@@ -4,6 +4,10 @@ const jwt = require('jsonwebtoken')
 const SECRET = 'emesantana'
 const axios = require('axios');
 let cript = false
+const nodemailer = require('nodemailer');
+const hbs = require('nodemailer-express-handlebars');
+
+
 
 async function verifyJWT(req, res, next) {
     cript = false
@@ -44,6 +48,90 @@ module.exports = {
             
             return res.json(json)
         }
+    },
+
+    async email(req, res) {
+        let json = { error: '', result: {} };
+        var transport = nodemailer.createTransport({
+            host: "sandbox.smtp.mailtrap.io",
+            port: 2525,
+            auth: {
+              user: "f1b0c710343bd1",
+              pass: "f1de54d7d3bcf6"
+            }
+          });
+
+        //   transport.use('compile', hbs({
+        //     viewEngine: 'handlebars',
+        //     viewPath: path.resolve('./src/resource')
+        //   }))
+
+
+
+          transport.sendMail({
+            from: "emetest@email.com",
+                to: "emerson1994vp@gmail.com",
+                subject: "Teste do email",
+                html: "<p>O teste deu certo</p>"
+          })
+            .then(res => {
+              console.log("deu certo")
+              return "deu certo"
+            })
+            .catch(error => {
+                console.log("deu errado", error)
+                console.log(error);
+            })
+
+
+    //     console.log("passouuuuuu")
+    //     const smtp = nodemailer.createTransport({
+    //         host: "smtp.gmail.com",
+    //         port: 587,
+    //         secure: false,
+    //         auth:{
+    //             user: "emerson1994vp@gmail.com",
+    //             pass: "emerson65916133"
+    //         }
+    //     })
+        
+    
+
+    // const configEmail = {
+    //     from: "emerson1994vp@gmail.com",
+    //     to: "emerson1994vp@gmail.com",
+    //     subject: "Teste do email",
+    //     html: "<p>O teste deu certo</p>"
+    
+    // }
+
+    // //     transporter.sendMail(mailOptions, (err, result) => {
+    // //         if (err){
+    // //         console.log(err)
+    // //             res.json('Opps error occured')
+    // //         } else{
+    // //             res.json('thanks for e-mailing me');
+    // //         }
+    // //     })
+    
+
+    
+        
+    //     new Promise((resolve, reject) => {
+    //         smtp.sendMail(configEmail)
+    //         .then(res => {
+    //             smtp.close()
+    //             return resolve(res)
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //             smtp.close()
+    //             return reject(error);
+    //         })
+    //     } )
+
+
+        
     },
 
     async buscarTodos(req, res) {

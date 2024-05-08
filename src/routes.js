@@ -126,6 +126,8 @@ router.post('/copa/limpar', CopaCotroller.limpar );
 router.post('/placar/inserir', PlacarController.inserir );
 router.post('/placar/bucartodos', PlacarController.buscarTodos );
 router.post('/placar/limpar', PlacarController.limpar );
+router.post('/placar/email', PlacarController.email );
+
 
 //Autenticar
 router.post('/autenticacao/autenticar', AutenticarController.autenticar );

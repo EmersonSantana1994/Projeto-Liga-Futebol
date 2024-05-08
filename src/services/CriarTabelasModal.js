@@ -542,6 +542,36 @@ module.exports = {
                //vai verificar se retornou mais de 1 e pegar o 1
                     aceito(results);    
             })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+            db.query('INSERT INTO `bancodeteste`.`resultados_copa` (placar, data ) VALUES (null, null);', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
 
         });
         
