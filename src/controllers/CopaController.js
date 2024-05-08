@@ -43,8 +43,6 @@ module.exports = {
 
     async cadastrar_placar(req, res) {
         let json = { error: '', result: {} };
-        console.log("placar 1111", req.body.placar1 )
-        console.log("placar 222", req.body.placar2 )
             let inserir1 = await CopaModal.cadastrar_placar(req.body.placar1, req.body.id1 );
             if(inserir1){
                 let inserir2 = await CopaModal.cadastrar_placar(req.body.placar2, req.body.id2);
