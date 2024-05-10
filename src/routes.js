@@ -106,6 +106,7 @@ router.post('/criar/tabelas', CriarTabelasController.criarTabelas );
 
 //Listar tudo
 router.post('/listar/todos', ListarTudoController.listarTudo );
+router.post('/tabela/pesquisar', ListarTudoController.pesquisar );
 
 //Pontos de torneio
 router.post('/pontos_torneio/listar_torneio', PontosTorneioController.listar_torneio );

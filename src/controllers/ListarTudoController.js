@@ -24,4 +24,31 @@ module.exports = {
             json.result = futebol
         return res.json(json.result)
     },
+
+    async pesquisar(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let futebol
+        if(req.body.tipo == "jogador"){
+            futebol = await ListarTimesJogadoresModal.jogador(req.body.pesquisa);
+        }else if(req.body.tipo == "gols"){
+            futebol = await ListarTimesJogadoresModal.gols(req.body.pesquisa);
+        }
+        else if(req.body.tipo == "liga"){
+            futebol = await ListarTimesJogadoresModal.liga(req.body.pesquisa);
+        }
+        else if(req.body.tipo == "nacionalidade"){
+            futebol = await ListarTimesJogadoresModal.nacionalidade(req.body.pesquisa);
+        }
+        else if(req.body.tipo == "posicao"){
+            futebol = await ListarTimesJogadoresModal.posicao(req.body.pesquisa);
+        }
+        else if(req.body.tipo == "time"){
+            futebol = await ListarTimesJogadoresModal.time(req.body.pesquisa);
+        }
+        
+       
+            json.result = futebol
+        return res.json(json.result)
+    },
 }
