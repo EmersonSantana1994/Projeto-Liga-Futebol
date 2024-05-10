@@ -150,7 +150,7 @@ module.exports = {
     },
     pesquisarJogadores: (id) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('select * from jogadores WHERE id_time = ?', [id], (error, results) => {
+            db.query('select * from jogadores WHERE id_time = ? ORDER BY dono Desc', [id], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }

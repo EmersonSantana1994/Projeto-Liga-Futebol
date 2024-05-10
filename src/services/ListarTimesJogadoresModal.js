@@ -22,7 +22,7 @@ module.exports = {
     },
     buscarJogadores: (id) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('SELECT * FROM jogadores WHERE id_time IN(?) ', [id], (error, results) => {
+            db.query('SELECT * FROM jogadores WHERE id_time IN(?) ORDER BY dono Desc', [id], (error, results) => {
                 if(error) { rejeitado(error); return; }
                //vai verificar se retornou mais de 1 e pegar o 1
                     aceito(results);    
