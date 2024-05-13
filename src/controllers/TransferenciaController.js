@@ -80,6 +80,38 @@ if (enviar.length > 0) {
             
                 json.result = idTime; //se tiver nota ele joga no json
                 return res.json(json)
+         },
+
+         async alterarDono(req, res, next) {  
+            let json = { error: '', result: [] };
+            let dono
+            if(req.body.nomeNovoDono){
+                if(req.body.nomeAntigoDono){
+                    let buscarIdNovoDodo = await TransferenciaModel.buscarNomeJogador(req.body.nomeNovoDono);
+
+                    if(buscarIdNovoDodo.length > 0){
+                        let buscarIdAntigoDodo = await TransferenciaModel.buscarNomeJogador(req.body.nomeAntigoDono);
+                        if(buscarIdAntigoDodo.length > 0){
+                            await TransferenciaModel.alterarAntigoDono(buscarIdAntigoDodo[0].id_jogador);
+                            dono = await TransferenciaModel.alterarNovoDono(buscarIdNovoDodo[0].id_jogador);
+                        }else{
+                            return res.status(500).send('Nome do antigo dono não existe')
+                        }
+                    }else{
+                        return res.status(500).send('Nome do novo dono não existe')
+                    }
+                   
+            
+                    json.result = dono; //se tiver nota ele joga no json
+                    return res.json(json)
+                }else{
+                    return res.status(500).send('Nome do antigo dono não informado')
+                }
+                
+            }else {
+                return res.status(500).send('Nome do novo dono não informado')
+            }
+            
          }
 
 }

@@ -79,6 +79,7 @@ router.post('/ranking/deletar', RankingMundialClubesController.deletar);
 router.post('/transferencia/jogador', TransferenciaController.tranferirJogador );
 router.post('/transferencia/jogadorComprado', TransferenciaController.tranferirJogadorComprado );
 router.post('/transferencia/bucarTimeAtualizado', TransferenciaController.bucarTimeAtualizado );
+router.post('/dono/alterar', TransferenciaController.alterarDono );
 
 //Cadastrar
 router.post('/cadastrar/time', CadastrarController.cadastrarTime );
@@ -132,6 +133,8 @@ router.post('/placar/email', PlacarController.email );
 
 //Autenticar
 router.post('/autenticacao/autenticar', AutenticarController.autenticar );
+
+
 module.exports = router;
 
 

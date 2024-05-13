@@ -77,4 +77,26 @@ module.exports = {
         });
     },
 
+    alterarNovoDono: (id_jogador) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('UPDATE jogadores SET dono = 1 WHERE (id_jogador = ?)', [id_jogador ], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+
+    alterarAntigoDono: (id_jogador) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('UPDATE jogadores SET dono = null WHERE (id_jogador = ?)', [id_jogador ], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+
     };
