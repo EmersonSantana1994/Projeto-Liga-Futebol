@@ -25,6 +25,36 @@ module.exports = {
         return res.json(json.result)
     },
 
+    async golsPais(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let futebol = await ListarTimesJogadoresModal.golsPais();
+            json.result = futebol
+        return res.json(json.result)
+    },
+
+    async golsLiga(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let futebol = await ListarTimesJogadoresModal.golsLiga();
+            json.result = futebol
+        return res.json(json.result)
+    },
+    async golsTime(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let futebol = await ListarTimesJogadoresModal.golsTime();
+            json.result = futebol
+        return res.json(json.result)
+    },
+    async golsPosicao(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let futebol = await ListarTimesJogadoresModal.golsPosicao();
+            json.result = futebol
+        return res.json(json.result)
+    },
+
     async pesquisar(req, res) {
         // verifyJWT(req, res)
         let json = { error: '', result: [] };

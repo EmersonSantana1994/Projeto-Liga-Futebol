@@ -3,6 +3,7 @@ const TransferenciaModel = require('../services/TransferenciaModel');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const TorneioModel = require('../services/TorneioModel');
+const RollBack = require('../services/RollBack');
 const SECRET = 'emesantana'
 let cript = false
 
@@ -92,8 +93,18 @@ if (enviar.length > 0) {
                     if(buscarIdNovoDodo.length > 0){
                         let buscarIdAntigoDodo = await TransferenciaModel.buscarNomeJogador(req.body.nomeAntigoDono);
                         if(buscarIdAntigoDodo.length > 0){
-                            await TransferenciaModel.alterarAntigoDono(buscarIdAntigoDodo[0].id_jogador);
-                            dono = await TransferenciaModel.alterarNovoDono(buscarIdNovoDodo[0].id_jogador);
+
+                            try{
+                                await RollBack.transaction();
+                                await TransferenciaModel.alterarAntigoDono(buscarIdAntigoDodo[0].id_jogador);
+                                dono = await TransferenciaModel.alterarNovoDono(buscarIdNovoDodo[0].id_jogador);
+                                await RollBack.commit();
+                            }catch(erro){
+                                await RollBack.rollBack();
+                                console.log(erro);
+                                return res.status(500).send('Erro na execução, Roll Back realizado')
+                              }
+                            
                         }else{
                             return res.status(500).send('Nome do antigo dono não existe')
                         }

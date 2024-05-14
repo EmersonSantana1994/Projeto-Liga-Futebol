@@ -108,6 +108,10 @@ router.post('/criar/tabelas', CriarTabelasController.criarTabelas );
 //Listar tudo
 router.post('/listar/todos', ListarTudoController.listarTudo );
 router.post('/tabela/pesquisar', ListarTudoController.pesquisar );
+router.post('/listar/gols_pais', ListarTudoController.golsPais );
+router.post('/listar/gols_liga', ListarTudoController.golsLiga );
+router.post('/listar/gols_time', ListarTudoController.golsTime );
+router.post('/listar/gols_posicao', ListarTudoController.golsPosicao );
 
 //Pontos de torneio
 router.post('/pontos_torneio/listar_torneio', PontosTorneioController.listar_torneio );
