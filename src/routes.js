@@ -138,6 +138,10 @@ router.post('/placar/email', PlacarController.email );
 //Autenticar
 router.post('/autenticacao/autenticar', AutenticarController.autenticar );
 
+//teste
+
+router.post('/teste/select', AutenticarController.select );
+
 
 module.exports = router;
 

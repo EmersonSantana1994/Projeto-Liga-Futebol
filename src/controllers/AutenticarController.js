@@ -3,6 +3,7 @@ const CadastrarModel = require('../services/CadastrarModel');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const PontosTorneioModal = require('../services/PontosTorneioModal');
+const TorneioModel = require('../services/TorneioModel');
 const SECRET = 'emesantana'
 let cript = false
 
@@ -32,6 +33,16 @@ module.exports = {
         let json = { error: '', result: [] };
         return res.json(json.result)
     },
+
+
+    async select(req, res, next) {  
+        let json = { error: '', result: [] };
+
+        let idTime = await TorneioModel.select(req.body.idTime);
+        
+            json.result = idTime; //se tiver nota ele joga no json
+            return res.json(json)
+     },
 
 
 }

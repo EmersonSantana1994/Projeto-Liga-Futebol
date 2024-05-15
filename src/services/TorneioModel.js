@@ -1,6 +1,17 @@
 const db = require('../db');
 
 module.exports = {
+
+    select: () => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT * FROM maisteste', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
     buscarTodos: () => {
         return new Promise((aceito, rejeitado)=>{
 
