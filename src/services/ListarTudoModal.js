@@ -62,6 +62,19 @@ module.exports = {
             })
         });
     },
+    listarDono: () => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('select j.nome As dono, t.nome As time, l.nome As liga from  jogadores j \
+            left join times_tb t on j.id_time = t.id_time \
+            left join ligas l on l.id = t.id_liga \
+            where j.dono = 1 \
+            order by l.nome asc', (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
     jogador: (nome) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('SELECT j.id_jogador as id, j.nome as Jogador, t.nome as Time, l.nome As Liga, a.gols, j.pais, j.posicao FROM jogadores j \

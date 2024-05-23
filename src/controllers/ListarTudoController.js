@@ -5,6 +5,13 @@ const jwt = require('jsonwebtoken');
 const TorneioModel = require('../services/TorneioModel');
 const ListarTimesJogadoresModal = require('../services/ListarTudoModal');
 const SECRET = 'emesantana'
+const neo4j = require('neo4j-driver');
+// const uri = 'bolt://localhost:7687'; // URI padrão do Neo4j
+
+const neo4jDriver = neo4j.driver('bolt://localhost:7687', neo4j.auth.basic('neo4j', '12345678'));
+
+// const neo4jDriver = neo4j.driver('bolt://10.6.12.51:7687', neo4j.auth.basic('neo4j', '123mudar'));
+
 
 function verifyJWT(req, res, next){
     const token = req.headers['x-access-token'];
@@ -21,6 +28,24 @@ module.exports = {
         // verifyJWT(req, res)
         let json = { error: '', result: [] };
         let futebol = await ListarTimesJogadoresModal.listarTudo();
+// console.log("futebol", futebol[0].id)
+
+        // const neo4jQuery = `CREATE (n:TesteEmerson {id: ${futebol[0].id}, nome: '${futebol[0].Jogador}', time: '${futebol[0].Time}' })`;
+    //     const neo4jQuery = `CREATE (n:TesteEmerson {id: 1, nome: 'Emerson', empresa: 'Matarazzo' })`;
+    //     const neo4jSession = neo4jDriver.session();
+    //     neo4jSession
+    // .run(neo4jQuery)
+    // .then(result => {
+    //   console.log('Dados importados para Neo4j com sucesso');
+    //   // Execução de queries adicionais ou visualização de dados
+    // })
+    // .catch(error => {
+    //   console.error('Erro ao importar dados para Neo4j', error);
+    // })
+    // .finally(() => {
+    //   neo4jSession.close();
+    //   neo4jDriver.close();
+    // });
             json.result = futebol
         return res.json(json.result)
     },
@@ -40,6 +65,7 @@ module.exports = {
             json.result = futebol
         return res.json(json.result)
     },
+
     async golsTime(req, res) {
         // verifyJWT(req, res)
         let json = { error: '', result: [] };
@@ -51,6 +77,14 @@ module.exports = {
         // verifyJWT(req, res)
         let json = { error: '', result: [] };
         let futebol = await ListarTimesJogadoresModal.golsPosicao();
+            json.result = futebol
+        return res.json(json.result)
+    },
+
+    async listarDono(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let futebol = await ListarTimesJogadoresModal.listarDono();
             json.result = futebol
         return res.json(json.result)
     },

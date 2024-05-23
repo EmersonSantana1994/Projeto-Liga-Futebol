@@ -613,6 +613,10 @@ module.exports = {
 
 // CREATE TABLE IF NOT EXISTS resultados(id bigint AUTO_INCREMENT, resultado varchar(100), data DATETIME ON UPDATE CURRENT_TIMESTAMP, PRIMARY KEY (id));
 
-//
+//ABAIXO mostra como fazer uma tabela se relacionando com MAIS DE UMA TABELA
+
+
+//lembrando que tem que inserir o unsigned na coluna quando vc criar a tabela principal
+//CREATE TABLE IF NOT EXISTS pessoa(id_pessoa bigint unsigned not null AUTO_INCREMENT, nome varchar(255), id_mente bigint unsigned not null, id_sono bigint unsigned not null, id_sexualidade bigint unsigned not null, id_nutricao bigint unsigned not null,  index jg_so_index(id_sono), index jg_me_index(id_mente), index jg_se_index(id_sexualidade), index jg_nu_index(id_nutricao), foreign key (id_mente)  references mente(id_mente) on delete cascade, foreign key (id_sexualidade) references sexualidade(id_sexualidade) on delete cascade, foreign key (id_nutricao)  references nutricao(id_nutricao) on delete cascade, foreign key (id_sono)  references sono(id_sono) on delete cascade,   PRIMARY KEY (id_pessoa));
 
     };

@@ -19,6 +19,7 @@ const AutenticarController = require('./controllers/AutenticarController');
 const ListarTudoController = require('./controllers/ListarTudoController');
 const CopaCotroller = require('./controllers/CopaController');
 const PlacarController = require('./controllers/PlacarController');
+const HealfControlle = require('./controllers/HealfController');
 
 router.use(
     express.urlencoded({
@@ -112,6 +113,7 @@ router.post('/listar/gols_pais', ListarTudoController.golsPais );
 router.post('/listar/gols_liga', ListarTudoController.golsLiga );
 router.post('/listar/gols_time', ListarTudoController.golsTime );
 router.post('/listar/gols_posicao', ListarTudoController.golsPosicao );
+router.post('/listar/listar_dono', ListarTudoController.listarDono );
 
 //Pontos de torneio
 router.post('/pontos_torneio/listar_torneio', PontosTorneioController.listar_torneio );
@@ -139,8 +141,11 @@ router.post('/placar/email', PlacarController.email );
 router.post('/autenticacao/autenticar', AutenticarController.autenticar );
 
 //teste
-
 router.post('/teste/select', AutenticarController.select );
+
+//healf
+router.post('/teste/healf', HealfControlle.questionario );
+
 
 
 module.exports = router;
