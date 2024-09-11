@@ -3,6 +3,7 @@ const db = require('../db');
 module.exports = {
 
     transaction: () => {
+        console.log("comecouuu")
         return new Promise((aceito, rejeitado)=>{
             db.query('start transaction', [], (error, results) => {
                 if(error) { rejeitado(error); return; }
@@ -13,6 +14,7 @@ module.exports = {
     },
 
     rollBack: () => {
+        console.log("terminouuuu")
         return new Promise((aceito, rejeitado)=>{
             db.query('rollback', [], (error, results) => {
                 if(error) { rejeitado(error); return; }

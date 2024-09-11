@@ -600,6 +600,7 @@ module.exports = {
     
    
 //ABAIXO mostra como adicionar uma coluna na tabela e referenciala com outra tabela
+//lembrando, se for referenciar uma tabela usando o id principal da tabela principal, a tabela alterada tem que estar ZERADA de dados pq o id ele é not null 
 
     //ALTER TABLE artilheiro ADD COLUMN id_jogador bigint unsigned not null, ADD foreign key (id_jogador) references jogadores(id_jogador) on delete cascade;
 

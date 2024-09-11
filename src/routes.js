@@ -20,6 +20,9 @@ const ListarTudoController = require('./controllers/ListarTudoController');
 const CopaCotroller = require('./controllers/CopaController');
 const PlacarController = require('./controllers/PlacarController');
 const HealfControlle = require('./controllers/HealfController');
+const ProntuarioController = require('./controllers/ProntuarioController');
+const TituloController = require('./controllers/TituloController');
+const ProntuarioCadastrarController = require('./controllers/ProntuarioCadastrarController');
 
 router.use(
     express.urlencoded({
@@ -136,6 +139,12 @@ router.post('/placar/bucartodos', PlacarController.buscarTodos );
 router.post('/placar/limpar', PlacarController.limpar );
 router.post('/placar/email', PlacarController.email );
 
+//TitulosJogadoresTorneio
+router.post('/titulo/inserir', TituloController.adicionar );
+router.post('/titulo/bucartodos', TituloController.listar );
+// router.post('/titulo/limpar', TituloController.limpar );
+
+
 
 //Autenticar
 router.post('/autenticacao/autenticar', AutenticarController.autenticar );
@@ -146,9 +155,20 @@ router.post('/teste/select', AutenticarController.select );
 //healf
 router.post('/teste/healf', HealfControlle.questionario );
 
-
-
+//prontuario
+router.post('/prontuario/listarUser', ProntuarioController.listarUser );
+router.post('/prontuario/listarUserContagem', ProntuarioController.listarUserContagem );
+router.post('/prontuario/listar', ProntuarioController.listar );
+router.post('/prontuario/listar2', ProntuarioController.listar2 );
+router.post('/prontuario/adicionar', ProntuarioController.adicionar );
+router.post('/prontuario/editar', ProntuarioController.editar );
+router.post('/tabela/busque', ProntuarioController.pesquisar );
+router.post('/tabela/busqueProntuario', ProntuarioController.pesquisarProntuario );
 module.exports = router;
+
+//BusqueUsuario
+router.post('/cadastro/busque', ProntuarioCadastrarController.buscar );
+router.post('/cadastro/buscarUsuario', ProntuarioCadastrarController.buscarUsuario );
 
 
 
