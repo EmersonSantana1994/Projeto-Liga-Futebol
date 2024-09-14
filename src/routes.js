@@ -23,6 +23,7 @@ const HealfControlle = require('./controllers/HealfController');
 const ProntuarioController = require('./controllers/ProntuarioController');
 const TituloController = require('./controllers/TituloController');
 const ProntuarioCadastrarController = require('./controllers/ProntuarioCadastrarController');
+const AgendamentoController = require('./controllers/AgendamentoController');
 
 router.use(
     express.urlencoded({
@@ -154,6 +155,11 @@ router.post('/teste/select', AutenticarController.select );
 
 //healf
 router.post('/teste/healf', HealfControlle.questionario );
+
+//Agendamento
+router.post('/agenda/getConsultorio', AgendamentoController.getConsultorio );
+router.post('/agenda/reservarAgendaMedica', AgendamentoController.reservarAgendaMedica );
+router.post('/agenda/buscartudo', AgendamentoController.buscartudo );
 
 //prontuario
 router.post('/prontuario/listarUser', ProntuarioController.listarUser );

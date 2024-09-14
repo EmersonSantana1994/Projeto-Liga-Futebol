@@ -603,7 +603,7 @@ module.exports = {
 //lembrando, se for referenciar uma tabela usando o id principal da tabela principal, a tabela alterada tem que estar ZERADA de dados pq o id ele é not null 
 
     //ALTER TABLE artilheiro ADD COLUMN id_jogador bigint unsigned not null, ADD foreign key (id_jogador) references jogadores(id_jogador) on delete cascade;
-
+//ATENÇÂO se caso estiver dando erro é por causa que no momento de criar as duas tabelas a principal e a alterada que o id delas não foi criado com o "unsigned" na frendo do tipo por exemplo  id bigint unsigned AUTO_INCREMENT PRIMARY KEY,
 
 //ABAIXO mostrar como criar uma tabela onde a data é inserida automaticamente quando é feito um insert
 
