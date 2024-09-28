@@ -160,6 +160,8 @@ router.post('/teste/healf', HealfControlle.questionario );
 router.post('/agenda/getConsultorio', AgendamentoController.getConsultorio );
 router.post('/agenda/reservarAgendaMedica', AgendamentoController.reservarAgendaMedica );
 router.post('/agenda/buscartudo', AgendamentoController.buscartudo );
+router.post('/agenda/repetir', AgendamentoController.repetir );
+router.post('/agenda/especialidade', AgendamentoController.especialidade );
 
 //prontuario
 router.post('/prontuario/listarUser', ProntuarioController.listarUser );

@@ -3,7 +3,7 @@ const TransferenciaModel = require('../services/TransferenciaModel');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const TorneioModel = require('../services/TorneioModel');
-const RollBack = require('../services/RollBack');
+
 const SECRET = 'emesantana'
 let cript = false
 
