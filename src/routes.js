@@ -24,6 +24,7 @@ const ProntuarioController = require('./controllers/ProntuarioController');
 const TituloController = require('./controllers/TituloController');
 const ProntuarioCadastrarController = require('./controllers/ProntuarioCadastrarController');
 const AgendamentoController = require('./controllers/AgendamentoController');
+const QuestionarioController = require('./controllers/QuestionarioController');
 
 router.use(
     express.urlencoded({
@@ -177,6 +178,11 @@ module.exports = router;
 //BusqueUsuario
 router.post('/cadastro/busque', ProntuarioCadastrarController.buscar );
 router.post('/cadastro/buscarUsuario', ProntuarioCadastrarController.buscarUsuario );
+
+//Questionario
+router.post('/quationario/salvar', QuestionarioController.salvar );
+router.post('/quationario/buscarQuestionario', QuestionarioController.buscarQuestionario );
+router.post('/quationario/buscarPerguntas', QuestionarioController.buscarPerguntas );
 
 
 
