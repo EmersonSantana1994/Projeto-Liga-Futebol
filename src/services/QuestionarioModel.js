@@ -50,6 +50,70 @@ module.exports = {
             });
         });
     },
+    buscarCpfRgNome: (cpf, rg, nome) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('SELECT * FROM pacliente Where nome LIKE ? OR cpf LIKE ?  OR rg LIKE ?', [nome + '%', cpf + '%', rg + '%'], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    buscarCpf: (cpf) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('SELECT * FROM pacliente Where cpf LIKE ?', [cpf + '%'], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    buscarRg: (rg) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('SELECT * FROM pacliente Where rg LIKE ?', [rg + '%'], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    buscarNome: (nome) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('SELECT * FROM pacliente Where nome LIKE ?', [nome + '%'], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    buscarRgNome: (nome, rg) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('SELECT * FROM pacliente Where nome LIKE ? OR rg LIKE ?', [nome + '%', rg + '%'], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    buscarCpfRg: (cpf, rg) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('SELECT * FROM pacliente Where cpf LIKE ? OR rg LIKE ?', [cpf + '%', rg + '%'], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    buscarCpfRg: (cpf, rg) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('SELECT * FROM pacliente Where cpf LIKE ? OR rg LIKE ?', [cpf + '%', rg + '%'], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    buscarCpfNome: (cpf, nome) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('SELECT * FROM pacliente Where cpf LIKE ? OR nome LIKE ?', [cpf + '%', nome + '%'], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
     buscarPergun: (idsQuestao) => {
         return new Promise((aceito, rejeitado) => {
             db.query('SELECT * FROM perguntas where id_questao IN (?)', [idsQuestao], (error, results) => {

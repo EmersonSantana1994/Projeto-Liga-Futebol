@@ -183,6 +183,7 @@ router.post('/cadastro/buscarUsuario', ProntuarioCadastrarController.buscarUsuar
 router.post('/quationario/salvar', QuestionarioController.salvar );
 router.post('/quationario/buscarQuestionario', QuestionarioController.buscarQuestionario );
 router.post('/quationario/buscarPerguntas', QuestionarioController.buscarPerguntas );
+router.post('/quationario/pacliente', QuestionarioController.buscaPacliente );
 
 
 

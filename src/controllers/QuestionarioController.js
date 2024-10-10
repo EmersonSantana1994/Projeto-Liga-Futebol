@@ -61,6 +61,38 @@ module.exports = {
         return res.json(json.result)
     },
 
+    async buscaPacliente(req, res) {
+        let json = { error: '', result: [] };
+
+        let cpf = req.body.cpf
+        let rg = req.body.rg
+        let nome = req.body.nome
+
+        let busque
+
+        if(cpf && rg && nome){
+             busque = await QuestionarioModel.buscarCpfRgNome(cpf, rg, nome);
+        }else if(cpf && !rg && !nome){
+             busque = await QuestionarioModel.buscarCpf(cpf);
+        }else if(!cpf && rg && !nome){
+             busque = await QuestionarioModel.buscarRg(rg);
+        }else if(!cpf && !rg && nome){
+             busque = await QuestionarioModel.buscarNome(nome);
+        }
+        else if(!cpf && rg && nome){
+             busque = await QuestionarioModel.buscarRgNome(rg, nome);
+        }else if(cpf && rg && !nome){
+             busque = await QuestionarioModel.buscarCpfRg(cpf, rg);
+        }else if(cpf && !rg && nome){
+             busque = await QuestionarioModel.buscarCpfNome(cpf, nome);
+        }else{
+            
+        }
+        
+        json.result = busque
+        return res.json(json.result)
+    },
+
     async buscarPerguntas(req, res) {
         let json = { error: '', result: [] };
         let idQuestionario = req.body.idQuestionario
@@ -68,17 +100,17 @@ module.exports = {
         let questoes = await QuestionarioModel.buscarQuestoes(idQuestionario);
         const idsQuestao = questoes.map(item => item.id_questao);
         let perguntas = await QuestionarioModel.buscarPergun(idsQuestao);
-      
+
         const questionariosComOptions = questoes.map(questionario => {
             // Filtra as perguntas que pertencem ao questionário atual
-            const options = perguntas.filter(pergunta => pergunta.id_questionario === questionario.id_questionario)
+            const options = perguntas.filter(pergunta => pergunta.id_questao === questionario.id_questao)
                                        .map(pergunta => pergunta.options); // Mapeia para pegar só as opções
 
             // Retorna um novo objeto com as opções adicionadas
             return { ...questionario, options };
           });
     
-
+console.log("questionariosComOptions", questionariosComOptions)
 
             json.result = questionariosComOptions
         return res.json(json.result)
