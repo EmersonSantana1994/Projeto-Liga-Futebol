@@ -34,6 +34,16 @@ module.exports = {
             });
         });
     },
+    respostas: (resposta, id, idPacliente) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('INSERT INTO respostas ( `resposta`, `id_questao`, `id_pacliente`) VALUES (?,?,?)', 
+                [resposta, id, idPacliente], 
+                (error, results)=>{
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
     buscarQuestionario: () => {
         return new Promise((aceito, rejeitado) => {
             db.query('SELECT * FROM questionario', [], (error, results) => {
