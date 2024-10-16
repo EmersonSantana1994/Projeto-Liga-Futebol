@@ -78,7 +78,7 @@ module.exports = {
 
         let idPacliente = req.body.idPacliente
 
-        console.log("yyyyy", variaveis)
+      
 
         // Chamada da função para cada variável, se não estiver vazia
         for (const { format, id } of variaveis) {
@@ -108,15 +108,19 @@ module.exports = {
             const processarArray = (array) => {
                 return array.map(item => item.split('-')[0]);
             };
-           
-                for (const id of req.body.formatSelectedOptionsIdPergunta) {
-                    for (const subArray of novoArray) {
-                        const valores = processarArray(subArray);
-                        for (const resposta of valores) {
-                            questionarios =  await QuestionarioModel.respostas(resposta, id, idPacliente);
-                        }
+
+
+            for (let j = 0; j < req.body.formatSelectedOptionsIdPergunta.length; j++) { 
+              
+                    const valores = processarArray(novoArray[j]);
+                    const id = req.body.formatSelectedOptionsIdPergunta[j];
+                    for (let i = 0; i < valores.length; i++) {
+                        const resposta = valores[i];
+                         questionarios =  await QuestionarioModel.respostas(resposta, id, idPacliente);
                     }
-                }
+
+            }
+           
             
         }
 
