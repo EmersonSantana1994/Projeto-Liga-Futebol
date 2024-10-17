@@ -124,6 +124,9 @@ module.exports = {
             
         }
 
+        questionarios =  await QuestionarioModel.consulta(idPacliente);
+
+
         json.result = questionarios
         return res.json(json.result)
     },

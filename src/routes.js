@@ -25,6 +25,7 @@ const TituloController = require('./controllers/TituloController');
 const ProntuarioCadastrarController = require('./controllers/ProntuarioCadastrarController');
 const AgendamentoController = require('./controllers/AgendamentoController');
 const QuestionarioController = require('./controllers/QuestionarioController');
+const ConsultaController = require('./controllers/ConsultaController');
 
 router.use(
     express.urlencoded({
@@ -186,5 +187,9 @@ router.post('/quationario/buscarPerguntas', QuestionarioController.buscarPergunt
 router.post('/quationario/pacliente', QuestionarioController.buscaPacliente );
 router.post('/quationario/respostas', QuestionarioController.respostas );
 
+
+//Consulta
+router.post('/consulta/buscarConsultaAberta', ConsultaController.buscarConsultaAberta );
+router.post('/consulta/buscarRespostas', ConsultaController.buscarRespostas );
 
 
