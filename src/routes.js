@@ -190,6 +190,8 @@ router.post('/quationario/respostas', QuestionarioController.respostas );
 
 //Consulta
 router.post('/consulta/buscarConsultaAberta', ConsultaController.buscarConsultaAberta );
+router.post('/consulta/buscarConsultaFechada', ConsultaController.buscarConsultaFechada );
 router.post('/consulta/buscarRespostas', ConsultaController.buscarRespostas );
-
+router.post('/consulta/inserirConsulta', ConsultaController.inserirConsulta );
+router.post('/consulta/buscarAnotacao', ConsultaController.buscarAnotacao );
 

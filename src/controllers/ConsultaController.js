@@ -33,10 +33,39 @@ module.exports = {
         return res.json(json.result)
     },
 
+    async buscarConsultaFechada(req, res) {
+        let json = { error: '', result: [] };
+
+        let consulta = await ConsultaModel.buscarConsultaFechada();
+
+        json.result = consulta
+        return res.json(json.result)
+    },
+
     async buscarRespostas(req, res) {
         let json = { error: '', result: [] };
         
         let consulta = await ConsultaModel.buscarRespostas(req.body.idPacliente);
+
+        json.result = consulta
+        return res.json(json.result)
+    },
+    async inserirConsulta(req, res) {
+        let json = { error: '', result: [] };
+        
+        let encerrar = await ConsultaModel.encerrarConsulta(req.body.idConsulta);
+
+        let consulta = await ConsultaModel.inserirConsulta(req.body.idPacliente, req.body.idMedico, 
+            req.body.anotacao, req.body.dataProcedimento, req.body.dataRetorno);
+
+        json.result = consulta
+        return res.json(json.result)
+    },
+    
+    async buscarAnotacao(req, res) {
+        let json = { error: '', result: [] };
+        
+        let consulta = await ConsultaModel.buscarAnotacao(req.body.idPacliente);
 
         json.result = consulta
         return res.json(json.result)
