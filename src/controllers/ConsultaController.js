@@ -7,7 +7,6 @@ const ListarLigasTimesModal = require('../services/ListarLigasTimesModal');
 const ConsultaModel = require('../services/ConsultaModel');
 const SECRET = 'emesantana'
 let cript = false
-const OpenAI = require('openai')
 const express = require('express');
 const axios = require('axios');
 require('dotenv').config();
