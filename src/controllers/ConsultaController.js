@@ -7,6 +7,13 @@ const ListarLigasTimesModal = require('../services/ListarLigasTimesModal');
 const ConsultaModel = require('../services/ConsultaModel');
 const SECRET = 'emesantana'
 let cript = false
+const OpenAI = require('openai')
+const express = require('express');
+const axios = require('axios');
+require('dotenv').config();
+
+
+
 
 async function verifyJWT(req, res, next) {
     cript = false
@@ -70,4 +77,6 @@ module.exports = {
         json.result = consulta
         return res.json(json.result)
     },
+
+
 }

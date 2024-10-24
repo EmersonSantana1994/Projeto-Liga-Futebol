@@ -5,6 +5,7 @@ const SECRET = 'emesantana'
 const axios = require('axios');
 let cript = false;
 const RollBack = require('../services/RollBack');
+const { atualiza } = require('../services/PlacarModel');
 
 async function verifyJWT(req, res, next) {
     cript = false
@@ -111,6 +112,35 @@ module.exports = {
         json.result = inserir; //se tiver nota ele joga no json
 
         return res.json(json.result)
+
+    },
+
+    async atualiza(req, res) {
+        let json = { error: '', result: [] };
+
+        await AgendamenroModel.atualiza(req.body.especialidade, 
+            req.body.descricao, req.body.startData, req.body.endtData, req.body.tipo, req.body.id);
+
+        return res.json(json)
+
+    },
+  
+
+    async deletar(req, res) {
+        let json = { error: '', result: [] };
+
+        await AgendamenroModel.deletar(req.body.id);
+
+        return res.json(json)
+
+    },
+
+    async deletarAllEvento(req, res) {
+        let json = { error: '', result: [] };
+
+        await AgendamenroModel.deletarAllEvento(req.body.id_especialidade);
+
+        return res.json(json)
 
     },
 

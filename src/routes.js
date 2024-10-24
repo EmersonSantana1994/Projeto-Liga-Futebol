@@ -164,6 +164,9 @@ router.post('/agenda/reservarAgendaMedica', AgendamentoController.reservarAgenda
 router.post('/agenda/buscartudo', AgendamentoController.buscartudo );
 router.post('/agenda/repetir', AgendamentoController.repetir );
 router.post('/agenda/especialidade', AgendamentoController.especialidade );
+router.post('/agenda/atualiza', AgendamentoController.atualiza );
+router.post('/agenda/deletar', AgendamentoController.deletar );
+router.post('/agenda/deletarAllEvento', AgendamentoController.deletarAllEvento );
 
 //prontuario
 router.post('/prontuario/listarUser', ProntuarioController.listarUser );
@@ -194,4 +197,7 @@ router.post('/consulta/buscarConsultaFechada', ConsultaController.buscarConsulta
 router.post('/consulta/buscarRespostas', ConsultaController.buscarRespostas );
 router.post('/consulta/inserirConsulta', ConsultaController.inserirConsulta );
 router.post('/consulta/buscarAnotacao', ConsultaController.buscarAnotacao );
+
+
+
 

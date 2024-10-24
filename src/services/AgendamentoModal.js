@@ -51,11 +51,43 @@ module.exports = {
     },
     buscartudo: (id_consultorio) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('select start, end, `desc`, color, tipo, id_consultorio, id_medico, id_repetir, e.especialidade AS title from eventos ev \
+            db.query('select start, end, `desc`, color, tipo, id_consultorio, ev.id_especialidade, id_medico, ev.id, id_repetir, e.especialidade AS title from eventos ev \
                 left join especialidade e on ev.id_especialidade = e.id_especialidade where id_consultorio = ?', 
                 [id_consultorio], (error, results)=>{
                 if(error) { rejeitado(error); return; }
                 aceito(results);
+            });
+        });
+    },
+    atualiza: (especialidade, descricao, startDate, endtDate, tipo, id) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('UPDATE eventos SET id_especialidade = ?,  `desc` = ?, \
+                start = ?, end = ?, tipo = ? where id = ?', [especialidade, descricao, startDate, 
+                    endtDate, tipo, id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+    deletar: (id) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('DELETE FROM eventos WHERE id = ?', [id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+    deletarAllEvento: (id) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('DELETE FROM eventosrepetir WHERE id_repetir = ?', [id], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
             });
         });
     },
