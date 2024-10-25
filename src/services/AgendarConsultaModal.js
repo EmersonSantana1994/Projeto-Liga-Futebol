@@ -20,10 +20,34 @@ module.exports = {
     },
     buscarMedico: (idEvento) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('select e.start, e.end, m.nomeMedico, m.crm, m.rqe, es.especialidade  from eventos e \
+            db.query('select e.start, e.end, m.nomeMedico, m.id_medico, m.crm, m.rqe, es.especialidade  from eventos e \
                 left join medico m on m.id_medico = e.id_medico \
                 left join especialidade es on es.id_especialidade = e.id_especialidade \
                 where e.id = ?', [idEvento], (error, results)=>{
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    inserirAgendamentoPacliente: (horario, dataAgendada, id_pacliente, id_medico, especialidade) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('INSERT INTO consulta_agendada (horario, dataAgendada, id_pacliente, id_medico, especialidade) VALUES (?,?,?,?,?)', 
+                [horario, dataAgendada, id_pacliente, id_medico, especialidade], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+    buscarConsultas: (id_medico) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('select p.nome, p.cpf, m.nomeMedico,  ca.horario, ca.dataAgendada, ca.especialidade, \
+                p.id_pacliente, m.id_medico, id_consultaAgendada \
+                from consulta_agendada ca \
+                left join pacliente p on p.id_pacliente = ca.id_pacliente \
+                left join medico m on m.id_medico = ca.id_medico \
+                where ca.id_medico = ?', [id_medico], (error, results)=>{
                 if(error) { rejeitado(error); return; }
                 aceito(results);
             });

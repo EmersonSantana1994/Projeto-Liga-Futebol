@@ -203,5 +203,5 @@ router.post('/consulta/buscarAnotacao', ConsultaController.buscarAnotacao );
 router.post('/consultarAgenda/especialidade', AgendarConsultaControlle.buscarEspecialidade );
 router.post('/consultarAgenda/buscarDia', AgendarConsultaControlle.buscarDia );
 router.post('/consultarAgenda/buscarMedico', AgendarConsultaControlle.buscarMedico );
-
-
+router.post('/consultarAgenda/inserirAgendamentoPacliente', AgendarConsultaControlle.inserirAgendamentoPacliente );
+router.post('/consultarAgenda/buscarConsultas', AgendarConsultaControlle.buscarConsultas );

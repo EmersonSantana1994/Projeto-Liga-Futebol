@@ -63,4 +63,33 @@ module.exports = {
 
     },
 
+    async inserirAgendamentoPacliente(req, res) {
+        let inserir
+        let json = { error: '', result: {} };
+
+
+        inserir = await AgendarConsultaModal.inserirAgendamentoPacliente(req.body.horario, req.body.dataAgendada, 
+            req.body.id_pacliente, req.body.id_medico, req.body.especialidade);
+
+
+        json.result = inserir; //se tiver nota ele joga no json
+
+        return res.json(json.result)
+
+    },
+
+    async buscarConsultas(req, res) {
+        let inserir
+        let json = { error: '', result: {} };
+
+
+        inserir = await AgendarConsultaModal.buscarConsultas(req.body.id_medico);
+
+
+        json.result = inserir; //se tiver nota ele joga no json
+
+        return res.json(json.result)
+
+    },
+
 }
