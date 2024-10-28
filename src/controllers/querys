@@ -1,0 +1,73 @@
+CREATE TABLE IF NOT EXISTS eventos(id bigint unsigned not null AUTO_INCREMENT, start DATETIME, 
+end DATETIME, `desc` VARCHAR(600), color VARCHAR(255), tipo VARCHAR(255),
+id_consultorio bigint unsigned not null, id_medico bigint unsigned not null, 
+id_repetir bigint unsigned not null, id_especialidade bigint unsigned not null,
+index ev_me_index(id_medico), index ev_so_index(id_consultorio), index ev_se_index(id_repetir), index ev_es_index(id_especialidade), 
+foreign key (id_consultorio) references consultorios(id_consultorio) on delete cascade,
+foreign key (id_medico) references medico(id_medico) on delete cascade, 
+foreign key (id_repetir) references eventosrepetir(id_repetir) on delete cascade, 
+foreign key (id_especialidade) references especialidade(id_especialidade) on delete cascade, PRIMARY KEY (id));
+
+
+CREATE TABLE questionario(id_questionario bigint unsigned not null AUTO_INCREMENT, 
+nomeQuestionario varchar(300) not null,
+id_usuario  int not null,   
+dataDeAdicao DATETIME DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (id_questionario));
+
+CREATE TABLE questoes (
+    id_questao  bigint unsigned not null AUTO_INCREMENT PRIMARY KEY,
+    text VARCHAR(500),
+    title VARCHAR(255),
+    type VARCHAR(50),
+    id_questionario bigint unsigned not null,
+    index qu__q_index(id_questionario), 
+foreign key (id_questionario) references questionario(id_questionario) on delete cascade
+);
+
+CREATE TABLE perguntas(id_pergunta bigint unsigned not null AUTO_INCREMENT, 
+options varchar(550),   
+id_questao bigint unsigned not null,
+index qu__pe_index(id_questao), 
+foreign key (id_questao) references questoes(id_questao) on delete cascade, 
+PRIMARY KEY (id_pergunta));
+
+
+CREATE TABLE IF NOT EXISTS respostas(id_resposta bigint unsigned not null AUTO_INCREMENT, resposta varchar(800), 
+id_questao bigint unsigned not null, id_pacliente bigint unsigned not null, index res_pe_index(id_questao), index res_pa_index(id_pacliente),
+foreign key (id_questao)  references questoes(id_questao) on delete cascade, 
+foreign key (id_pacliente)  references pacliente(id_pacliente) on delete cascade, 
+PRIMARY KEY (id_resposta));
+
+select q.text, r.resposta, p.nome, q.type  from respostas r
+left join questoes q on q.id_questao = r.id_questao
+left join pacliente p on p.id_pacliente = r.id_pacliente
+
+
+CREATE TABLE IF NOT EXISTS consulta(id_consulta bigint unsigned not null AUTO_INCREMENT, 
+id_pacliente bigint unsigned not null, ativo TINYINT(1) NOT NULL, dataAbertura DATETIME DEFAULT CURRENT_TIMESTAMP,
+dataEncerrada DATETIME ON UPDATE CURRENT_TIMESTAMP,
+index co_pa_index(id_pacliente), foreign key (id_pacliente)  references pacliente(id_pacliente) on delete cascade, 
+PRIMARY KEY (id_consulta));
+
+
+CREATE TABLE IF NOT EXISTS prontuario(id_prontuario bigint unsigned not null AUTO_INCREMENT, 
+id_pacliente bigint unsigned not null, id_medico bigint unsigned not null, anotacao LONGTEXT,  
+dataCriacao DATETIME DEFAULT CURRENT_TIMESTAMP, dataProcedimento DATE, dataRetorno DATE,
+index pro_pa_index(id_pacliente), index pro_me_index(id_medico), foreign key (id_pacliente)  
+references pacliente(id_pacliente) on delete cascade, foreign key (id_medico)  
+references medico(id_medico) on delete cascade, 
+PRIMARY KEY (id_prontuario));
+
+CREATE TABLE IF NOT EXISTS consulta_agendada(id_consultaAgendada bigint unsigned not null AUTO_INCREMENT, horario TIME, dataAgendada DATE,
+id_pacliente bigint unsigned not null, id_medico bigint unsigned not null, id_especialidade bigint unsigned not null,  especialidade varchar(300) not null,
+dataCriacao DATETIME DEFAULT CURRENT_TIMESTAMP, 
+index pro_pa_index(id_pacliente), index pro_me_index(id_medico), foreign key (id_pacliente)  
+references pacliente(id_pacliente) on delete cascade, foreign key (id_medico)  
+references medico(id_medico) on delete cascade, foreign key (id_especialidade)  
+references especialidade(id_especialidade) on delete cascade, 
+PRIMARY KEY (id_consultaAgendada));
+
+
+CREATE TABLE IF NOT EXISTS especialidade(id_especialidade bigint unsigned not null AUTO_INCREMENT, especialidade varchar(300), 
+PRIMARY KEY (id_especialidade));

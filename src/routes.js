@@ -204,4 +204,4 @@ router.post('/consultarAgenda/especialidade', AgendarConsultaControlle.buscarEsp
 router.post('/consultarAgenda/buscarDia', AgendarConsultaControlle.buscarDia );
 router.post('/consultarAgenda/buscarMedico', AgendarConsultaControlle.buscarMedico );
 router.post('/consultarAgenda/inserirAgendamentoPacliente', AgendarConsultaControlle.inserirAgendamentoPacliente );
-router.post('/consultarAgenda/buscarConsultas', AgendarConsultaControlle.buscarConsultas );
+// router.post('/consultarAgenda/buscarConsultas', AgendarConsultaControlle.buscarValidarAgendamento );

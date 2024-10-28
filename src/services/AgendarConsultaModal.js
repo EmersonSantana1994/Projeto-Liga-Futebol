@@ -18,21 +18,21 @@ module.exports = {
             });
         });
     },
-    buscarMedico: (idEvento) => {
+    buscarMedico: (data, especialidade) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('select e.start, e.end, m.nomeMedico, m.id_medico, m.crm, m.rqe, es.especialidade  from eventos e \
                 left join medico m on m.id_medico = e.id_medico \
                 left join especialidade es on es.id_especialidade = e.id_especialidade \
-                where e.id = ?', [idEvento], (error, results)=>{
+                where DATE(e.start) = ? and es.id_especialidade = ?', [data, especialidade], (error, results)=>{
                 if(error) { rejeitado(error); return; }
                 aceito(results);
             });
         });
     },
-    inserirAgendamentoPacliente: (horario, dataAgendada, id_pacliente, id_medico, especialidade) => {
+    inserirAgendamentoPacliente: (horario, dataAgendada, id_pacliente, id_medico, especialidade, id_especialidade) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('INSERT INTO consulta_agendada (horario, dataAgendada, id_pacliente, id_medico, especialidade) VALUES (?,?,?,?,?)', 
-                [horario, dataAgendada, id_pacliente, id_medico, especialidade], (error, results) => {
+            db.query('INSERT INTO consulta_agendada (horario, dataAgendada, id_pacliente, id_medico, especialidade, id_especialidade ) VALUES (?,?,?,?,?,?)', 
+                [horario, dataAgendada, id_pacliente, id_medico, especialidade, id_especialidade], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
@@ -48,6 +48,14 @@ module.exports = {
                 left join pacliente p on p.id_pacliente = ca.id_pacliente \
                 left join medico m on m.id_medico = ca.id_medico \
                 where ca.id_medico = ?', [id_medico], (error, results)=>{
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    validarConsultas: (data, especialidade) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('select horario from consulta_agendada where DATE(dataAgendada) = ? and id_especialidade = ? ', [data, especialidade], (error, results)=>{
                 if(error) { rejeitado(error); return; }
                 aceito(results);
             });
