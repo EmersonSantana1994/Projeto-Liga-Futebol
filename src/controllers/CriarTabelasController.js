@@ -42,6 +42,7 @@ module.exports = {
         await CriarTabelasModal.placares_copa();
         await CriarTabelasModal.times_copa();
         await CriarTabelasModal.placar_jogo();
+        await CriarTabelasModal.ranking_titulos();
      let verifica =   await CriarTabelasModal.verificarResultados();
      if(verifica.length == 0 ){
         await CriarTabelasModal.salvarIdResultados();

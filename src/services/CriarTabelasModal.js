@@ -183,6 +183,17 @@ module.exports = {
         });
     },
 
+    ranking_titulos: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('CREATE TABLE IF NOT EXISTS ranking_titulos(id bigint AUTO_INCREMENT, nomeJogador varchar(100), liga int, copa int, subLiga int, mundial int, superCopa int, total int, PRIMARY KEY (id));', 
+                [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1s
+                    aceito(results);    
+            })
+        });
+    },
+
     verificarResultados: () => {
         return new Promise((aceito, rejeitado)=>{
             db.query('Select * from resultados where id > 0;', [], (error, results) => {

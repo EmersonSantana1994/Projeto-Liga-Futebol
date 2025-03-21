@@ -22,6 +22,7 @@ const PlacarController = require('./controllers/PlacarController');
 const HealfControlle = require('./controllers/HealfController');
 const ProntuarioController = require('./controllers/ProntuarioController');
 const TituloController = require('./controllers/TituloController');
+const RankingTitulosController = require('./controllers/RankingTitulosController');
 const ProntuarioCadastrarController = require('./controllers/ProntuarioCadastrarController');
 const AgendamentoController = require('./controllers/AgendamentoController');
 const QuestionarioController = require('./controllers/QuestionarioController');
@@ -148,7 +149,13 @@ router.post('/titulo/inserir', TituloController.adicionar );
 router.post('/titulo/bucartodos', TituloController.listar );
 // router.post('/titulo/limpar', TituloController.limpar );
 
+//RankingTitulosJogadoresTorneio
+router.post('/titulo_ranking/inserir', RankingTitulosController.adicionar );
+router.post('/titulo_ranking/bucartodos', RankingTitulosController.buscarTodos );
 
+//------------------------------------------------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------------------------------------------------//
 
 //Autenticar
 router.post('/autenticacao/autenticar', AutenticarController.autenticar );
