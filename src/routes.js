@@ -53,6 +53,10 @@ router.put('/artilheiro/atualiza', ArtilheiroControler.atualizaPontos);
 router.post('/artilheiro/delete', ArtilheiroControler.deleteJogador);
 router.post('/artilheiro/delete/torneio', ArtilheiroControler.deleteJogadorTorneio);
 
+//Assitencia
+router.post('/assistencia/inserir', ArtilheiroControler.inserirPontos);
+router.post('/assistencia/buscar', ArtilheiroControler.buscarTodos);
+router.post('/assistencia/buscar/torneio', ArtilheiroControler.buscarTodosTorneio);
 //Torneio
 router.post('/torneio/buscar', TorneioController.buscarTodos);
 router.post('/torneio/deletarTimeSorteado', TorneioController.deleteTimeSorteado);
