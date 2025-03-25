@@ -3,7 +3,7 @@ const db = require('../db');
 module.exports = {
     buscarTodos: () => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('SELECT * FROM assistencia ORDER BY gols Desc', (error, results)=>{
+            db.query('SELECT * FROM assistencia ORDER BY assistencias Desc', (error, results)=>{
                 if(error) { rejeitado(error); return; }
                 aceito(results);
             });
@@ -12,7 +12,25 @@ module.exports = {
 
     buscarTodosTorneio: () => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('SELECT * FROM assistencia_torneio ORDER BY gols Desc', (error, results)=>{
+            db.query('SELECT * FROM assistencia_torneio ORDER BY assistencias Desc', (error, results)=>{
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+
+    buscarJogadorTorneio: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT * FROM assistencia_torneio Where (nome = ?) ', [nome], (error, results)=>{
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+
+    buscarJogador: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT * FROM assistencia Where (nome = ?) ', [nome], (error, results)=>{
                 if(error) { rejeitado(error); return; }
                 aceito(results);
             });
@@ -23,7 +41,7 @@ module.exports = {
 
     inserirPontos: (dados, id) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('INSERT INTO assistencia (assistencia, nome, id_jogador) VALUES (?,?,?)', [dados.gols, dados.nome, id], (error, results) => {
+            db.query('INSERT INTO assistencia (assistencia, nome, id_jogador) VALUES (?,?,?)', [dados.assistencia, dados.nome, id], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
@@ -32,9 +50,9 @@ module.exports = {
         });
     },
 
-    inserirPontosTorneio: (dados, gols) => {
+    inserirPontosTorneio: (dados, assistencia) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('INSERT INTO assistencia_torneio (assistencia, nome) VALUES (?,?)', [gols, dados.nome], (error, results) => {
+            db.query('INSERT INTO assistencia_torneio (assistencia, nome) VALUES (?,?)', [assistencia, dados.nome], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
@@ -45,7 +63,7 @@ module.exports = {
 
     atualizaPontos: (dados) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('UPDATE assistencia SET gols = ? WHERE (id = ?)', [dados.gols, dados.id], (error, results) => {
+            db.query('UPDATE assistencia SET assistencias = ? WHERE (id = ?)', [dados.assistencia, dados.id], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
@@ -54,9 +72,20 @@ module.exports = {
         });
     },
 
-    atualizaPontosToneio: (dados, gols) => {
+    atualizaPontosToneio: (dados, assistencia) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('UPDATE assistencia_torneio SET gols = ? WHERE (nome = ?)', [gols, dados.nome], (error, results) => {
+            db.query('UPDATE assistencia_torneio SET assistencias = ? WHERE (nome = ?)', [assistencia, dados.nome], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);
+            });
+        });
+    },
+
+    atualizaPontos: (dados, atualiza) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('UPDATE assistencia SET assistencias = ? WHERE (id = ?)', [atualiza, dados.id], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }

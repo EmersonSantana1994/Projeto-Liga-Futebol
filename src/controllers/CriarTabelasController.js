@@ -44,7 +44,7 @@ module.exports = {
         await CriarTabelasModal.placar_jogo();
         await CriarTabelasModal.ranking_titulos();
         await CriarTabelasModal.assistencia();
-        await CriarTabelasModal.artilheiroTorneio();
+        await CriarTabelasModal.assistenciaTorneio();
      let verifica =   await CriarTabelasModal.verificarResultados();
      if(verifica.length == 0 ){
         await CriarTabelasModal.salvarIdResultados();

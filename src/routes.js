@@ -6,6 +6,7 @@ module.exports = router;
 
 const LoginController = require('./controllers/LoginControllers');
 const ArtilheiroControler = require('./controllers/ArtilheiroControler');
+const AssisteciaControler = require('./controllers/AssistenciaControler');
 const TorneioController = require('./controllers/TorneioController');
 const RanckingJogadoresController = require('./controllers/RanckingJogadoresController');
 const RankingMundialClubesController = require('./controllers/RankingMundialClubesController');
@@ -54,9 +55,9 @@ router.post('/artilheiro/delete', ArtilheiroControler.deleteJogador);
 router.post('/artilheiro/delete/torneio', ArtilheiroControler.deleteJogadorTorneio);
 
 //Assitencia
-router.post('/assistencia/inserir', ArtilheiroControler.inserirPontos);
-router.post('/assistencia/buscar', ArtilheiroControler.buscarTodos);
-router.post('/assistencia/buscar/torneio', ArtilheiroControler.buscarTodosTorneio);
+router.post('/assistencia/inserir', AssisteciaControler.inserirPontos);
+router.post('/assistencia/buscar', AssisteciaControler.buscarTodos);
+router.post('/assistencia/buscar/torneio', AssisteciaControler.buscarTodosTorneio);
 //Torneio
 router.post('/torneio/buscar', TorneioController.buscarTodos);
 router.post('/torneio/deletarTimeSorteado', TorneioController.deleteTimeSorteado);
