@@ -92,20 +92,21 @@ module.exports = {
             return res.status(500).send('Jogador não cadastrado na tebla de jogadores')
         }
         let buscarJogadorTorneio = await AssitenciaModel.buscarJogadorTorneio(req.body.nome);
-        let buscarJogador = await AssitenciaModel.buscarJogadorTorneio(req.body.nome);
-            
+        let buscarJogador = await AssitenciaModel.buscarJogador(req.body.nome);
+        console.log("ffffffffffff", req.body.assistencia )
             if(buscarJogador.length > 0){
-                let atualiza =  req.body.assitencia + buscarJogador[0].assistencias  
+                console.log("uuuuuuuuu", buscarJogador[0].assistencias )
+                let atualiza =  req.body.assistencia + buscarJogador[0].assistencias  
                 await AssitenciaModel.atualizaPontos(dados, atualiza);
             }
             else{
                 inserir = await AssitenciaModel.inserirPontos(dados, buscarIdJogador[0].id_jogador);
             }
             if(buscarJogadorTorneio.length > 0){
-                let atualiza =  req.body.assitencia + buscarJogadorTorneio[0].assistencias  
+                let atualiza =  req.body.assistencia + buscarJogadorTorneio[0].assistencias  
                    await AssitenciaModel.atualizaPontosToneio(dados, atualiza);
                }else{
-                   await AssitenciaModel.inserirPontosTorneio(dados, req.body.assitencia);
+                   await AssitenciaModel.inserirPontosTorneio(dados, req.body.assistencia);
                }
             if (inserir) {
                 json.result = inserir; //se tiver nota ele joga no json

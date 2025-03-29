@@ -41,7 +41,7 @@ module.exports = {
 
     inserirPontos: (dados, id) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('INSERT INTO assistencia (assistencia, nome, id_jogador) VALUES (?,?,?)', [dados.assistencia, dados.nome, id], (error, results) => {
+            db.query('INSERT INTO assistencia (assistencias, nome, id_jogador) VALUES (?,?,?)', [dados.assistencia, dados.nome, id], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
@@ -52,7 +52,7 @@ module.exports = {
 
     inserirPontosTorneio: (dados, assistencia) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('INSERT INTO assistencia_torneio (assistencia, nome) VALUES (?,?)', [assistencia, dados.nome], (error, results) => {
+            db.query('INSERT INTO assistencia_torneio (assistencias, nome) VALUES (?,?)', [assistencia, dados.nome], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
@@ -85,7 +85,7 @@ module.exports = {
 
     atualizaPontos: (dados, atualiza) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('UPDATE assistencia SET assistencias = ? WHERE (id = ?)', [atualiza, dados.id], (error, results) => {
+            db.query('UPDATE assistencia SET assistencias = ? WHERE (nome = ?)', [atualiza, dados.nome], (error, results) => {
                 if(error) { 
                     rejeitado(error); 
                     return; }
