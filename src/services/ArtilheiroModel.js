@@ -115,6 +115,17 @@ module.exports = {
         });
     },
 
+    deleteJogadorTorneioAssistencia: (dados) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('DELETE FROM assistencia_torneio WHERE (id <> 0)', [], (error, results) => {
+                if(error) { 
+                    rejeitado(error); 
+                    return; }
+                    aceito(results);    
+            });
+        });
+    },
+
     buscarUm: (id) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('SELECT * FROM torneio WHERE id IN(?) ', [id], (error, results) => {

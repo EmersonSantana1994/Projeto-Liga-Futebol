@@ -134,6 +134,7 @@ module.exports = {
 
         let dados = {id: req.body.id}
             let inserir = await ArtilheiroModel.deleteJogadorTorneio(dados);
+            let inserir2 = await ArtilheiroModel.deleteJogadorTorneioAssistencia(dados);
             if (inserir) {  
                 json.result = inserir; //se tiver nota ele joga no json
             }
