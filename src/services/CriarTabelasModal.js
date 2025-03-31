@@ -214,6 +214,16 @@ module.exports = {
         });
     },
 
+    log: () => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('CREATE TABLE IF NOT EXISTS log(id int AUTO_INCREMENT, log int, PRIMARY KEY (id));', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
     verificarResultados: () => {
         return new Promise((aceito, rejeitado)=>{
             db.query('Select * from resultados where id > 0;', [], (error, results) => {
@@ -360,6 +370,58 @@ module.exports = {
             })
         });
     },
+    verificarResultadosPontos: () => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('Select * from pontos_troneio where id > 0;', [], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
+    salvarIdResultadosPontos: () => {
+        return new Promise((aceito, rejeitado) => {
+            db.query(`INSERT INTO pontos_troneio (nome, pontos) VALUES
+                ('Primeiro lugar no Campeonato Mundial', 400),
+                ('Primeiro lugar na Super Copa', 370),
+                ('Segundo lugar no Campeonato Mundial', 300),
+                ('Segundo lugar na Super Copa', 270),
+                ('Terceiro lugar no Campeonato Mundial', 200),
+                ('Terceiro lugar na Super Copa', 170),
+                ('Quarto lugar na Super Copa', 70),
+                ('Primeiro lugar na liga', 100),
+                ('Quarto lugar no Campeonato Mundial', 100),
+                ('Primeiro lugar na Copa', 100),
+                ('Primeiro lugar na Sub-Liga', 90),
+                ('Segundo lugar na liga', 60),
+                ('Quinto lugar no Campeonato Mundial', 60),
+                ('Segundo lugar na Copa', 60),
+                ('Segundo lugar na Sub-Liga', 50),
+                ('Sexto lugar no Campeonato Mundial', 40),
+                ('Terceiro lugar na liga', 30),
+                ('Terceiro lugar na Copa', 30),
+                ('Terceiro lugar na Sub-Liga', 20),
+                ('Sétimo lugar no Campeonato Mundial', 20),
+                ('Primeiro lugar na Recopa', 5);`,
+            [], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+
+    logInsert: (cont) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query(`INSERT INTO log (log) VALUES
+                (?);`,
+            [cont], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    
 
     salvarIdResultadosCopa: () => {
         return new Promise((aceito, rejeitado)=>{

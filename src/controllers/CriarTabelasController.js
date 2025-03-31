@@ -25,6 +25,7 @@ async function verifyJWT(req, res, next){
 
 module.exports = {
     async criarTabelas(req, res) {
+        let cont = 0
         let json = { error: '', result: [] };
         await CriarTabelasModal.ranking_clubes();
         await CriarTabelasModal.ranking_jogadores();
@@ -45,6 +46,9 @@ module.exports = {
         await CriarTabelasModal.ranking_titulos();
         await CriarTabelasModal.assistencia();
         await CriarTabelasModal.assistenciaTorneio();
+
+        //função abaixo para evitar duplicidade de gravação no banco
+        await CriarTabelasModal.log();
      let verifica =   await CriarTabelasModal.verificarResultados();
      if(verifica.length == 0 ){
         await CriarTabelasModal.salvarIdResultados();
@@ -52,6 +56,17 @@ module.exports = {
      let verificaCopa =   await CriarTabelasModal.verificarResultadosCopa();
      if(verificaCopa.length == 0 ){
         await CriarTabelasModal.salvarIdResultadosCopa();
+     }
+
+     let verificaPontos =   await CriarTabelasModal.verificarResultadosPontos();
+     if(verificaPontos.length === 0){
+
+        // evita duplicidade de gravação no banco
+       let log =  await CriarTabelasModal.logInsert(cont);
+       if(log.insertId === 1){
+        await CriarTabelasModal.salvarIdResultadosPontos();
+       }
+        
      }
        
         // let verificarSeTemSemLiga = await CriarTabelasModal.verificarSeTemSemLiga();
