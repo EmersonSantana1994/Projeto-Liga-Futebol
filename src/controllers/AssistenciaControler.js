@@ -93,9 +93,7 @@ module.exports = {
         }
         let buscarJogadorTorneio = await AssitenciaModel.buscarJogadorTorneio(req.body.nome);
         let buscarJogador = await AssitenciaModel.buscarJogador(req.body.nome);
-        console.log("ffffffffffff", req.body.assistencia )
             if(buscarJogador.length > 0){
-                console.log("uuuuuuuuu", buscarJogador[0].assistencias )
                 let atualiza =  req.body.assistencia + buscarJogador[0].assistencias  
                 await AssitenciaModel.atualizaPontos(dados, atualiza);
             }

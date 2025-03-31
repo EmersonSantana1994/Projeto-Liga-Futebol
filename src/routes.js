@@ -119,7 +119,7 @@ router.post('/listar/jogadores', ListarTimesJogadoresController.buscarTodosTimes
 //Criar tabelas
 router.post('/criar/tabelas', CriarTabelasController.criarTabelas );
 
-//Listar tudo
+//Listar tudo tabela geral
 router.post('/listar/todos', ListarTudoController.listarTudo );
 router.post('/tabela/pesquisar', ListarTudoController.pesquisar );
 router.post('/listar/gols_pais', ListarTudoController.golsPais );
