@@ -115,6 +115,7 @@ router.post('/listar/times', ListarLigasTimesController.buscarTodosTimes );
 //Listar Times e jogadores
 router.post('/listar/time', ListarTimesJogadoresController.buscarTodos );
 router.post('/listar/jogadores', ListarTimesJogadoresController.buscarTodosTimes );
+router.post('/listar/buscarTime', ListarTimesJogadoresController.buscarTime );
 
 //Criar tabelas
 router.post('/criar/tabelas', CriarTabelasController.criarTabelas );

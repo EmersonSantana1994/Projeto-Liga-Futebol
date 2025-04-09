@@ -18,6 +18,14 @@ function verifyJWT(req, res, next){
 
 module.exports = {
 
+    async buscarTime(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let futebol = await ListarTimesJogadoresModal.buscarTime(req.body.nome);
+            json.result = futebol
+        return res.json(json.result)
+    },
+
     async buscarTodos(req, res) {
         // verifyJWT(req, res)
         let json = { error: '', result: [] };
