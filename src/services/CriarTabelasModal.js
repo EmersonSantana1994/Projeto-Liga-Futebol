@@ -402,7 +402,7 @@ module.exports = {
                 ('Terceiro lugar na liga', 30),
                 ('Terceiro lugar na Copa', 30),
                 ('Terceiro lugar na Sub-Liga', 20),
-                ('Sétimo lugar no Campeonato Mundial', 20),
+                ('Setimo lugar no Campeonato Mundial', 20),
                 ('Primeiro lugar na Recopa', 5);`,
             [], (error, results) => {
                 if (error) { rejeitado(error); return; }
