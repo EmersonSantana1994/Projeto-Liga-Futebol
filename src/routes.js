@@ -74,6 +74,7 @@ router.post('/torneio/buscarPlacar', TorneioController.buscarPlacar);
 router.post('/torneio/buscarPlacares', TorneioController.buscarPlacares);
 router.post('/torneio/deletarPlacar', TorneioController.deletarPlacar);
 router.post('/torneio/deletar', TorneioController.deletar);
+router.post('/torneio/bucarCampeoes', TorneioController.bucarCampeoes);
 
 //RankingJogadores
 router.post('/rankingJogadores/encontrar/nome', RanckingJogadoresController.buscarNome);

@@ -32,6 +32,20 @@ module.exports = {
         });
     },
 
+    buscar: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT j.nome As jogador, l.nome As liga, t.nome As time FROM times_tb t \
+            left join jogadores j on t.id_time = j.id_time \
+            left join ligas l on t.id_liga = l.id \
+            where t.nome = ? order by j.dono Desc; ', [nome], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);
+            })
+        });
+    },
+
+
     verificarUsuario: (usuario) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('select usuario from tb_usuario where usuario = ?', [usuario], (error, results) => {

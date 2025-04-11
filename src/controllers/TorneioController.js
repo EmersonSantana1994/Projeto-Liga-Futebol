@@ -55,6 +55,21 @@ module.exports = {
             return res.json(json)
     },
 
+    async bucarCampeoes(req, res) {
+        let json = { error: '', result: {} };
+        let array = []
+        let dados = {primeiroLugar: req.body.primeiroLugar, segundoLugar: req.body.segundoLugar}
+            let primeiro = await TorneioModel.buscar(dados.primeiroLugar);
+            let segundoLugar = await TorneioModel.buscar(dados.segundoLugar);
+            array.push(primeiro)
+            array.push(segundoLugar)
+            console.log("array", array)
+            if (array) {  
+                json.result = array; //se tiver nota ele joga no json
+            }
+            return res.json(json)
+    },
+
     async cadastrarTime(req, res) {
         let json = { error: '', result: {} };
 
