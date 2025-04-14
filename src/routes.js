@@ -82,6 +82,7 @@ router.post('/rankingJogadores/buscar', RanckingJogadoresController.buscarTodos)
 router.post('/rankingJogadores/inserir', RanckingJogadoresController.inserirPontos);
 router.put('/rankingJogadores/atualiza', RanckingJogadoresController.atualizaPontos);
 router.post('/rankingJogadores/deletar', RanckingJogadoresController.deletar);
+router.post('/rankingJogadores/buscarJogador', RanckingJogadoresController.buscarJogadores);
 
 //RankingMundialClubes
 router.post('/ranking/encontrar/nome', RankingMundialClubesController.buscarNome);

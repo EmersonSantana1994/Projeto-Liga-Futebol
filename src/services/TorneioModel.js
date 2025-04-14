@@ -179,6 +179,16 @@ module.exports = {
         });
     },
 
+    buscarJogadores: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT * FROM jogadores WHERE nome IN(?) ', [nome], (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);
+            })
+        });
+    },
+
     bucarNome: (nome) => {
         return new Promise((aceito, rejeitado)=>{
             db.query('SELECT * FROM torneio WHERE nome IN(?) ', [nome], (error, results) => {

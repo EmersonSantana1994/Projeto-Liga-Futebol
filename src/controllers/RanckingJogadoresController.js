@@ -73,6 +73,17 @@ module.exports = {
         return res.json(json)
     },
 
+    async buscarJogadores(req, res) {
+        let json = { error: '', result: {} };
+        let nome = req.body.nome;
+        let futebol = await TorneioModel.buscarJogadores(nome);
+        if (futebol) {
+            json.result = futebol; //se tiver nota ele joga no json
+        }
+
+        return res.json(json)
+    },
+
     async buscarNome(req, res) {
         let json = { error: '', result: {} };
         let nome = req.body.nome;

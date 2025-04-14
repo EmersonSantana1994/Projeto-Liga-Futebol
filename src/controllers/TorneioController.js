@@ -63,7 +63,6 @@ module.exports = {
             let segundoLugar = await TorneioModel.buscar(dados.segundoLugar);
             array.push(primeiro)
             array.push(segundoLugar)
-            console.log("array", array)
             if (array) {  
                 json.result = array; //se tiver nota ele joga no json
             }
