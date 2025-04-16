@@ -131,6 +131,11 @@ router.post('/listar/gols_time', ListarTudoController.golsTime );
 router.post('/listar/gols_posicao', ListarTudoController.golsPosicao );
 router.post('/listar/listar_dono', ListarTudoController.listarDono );
 
+router.post('/listar/assistencias_pais', ListarTudoController.assistenciasPais );
+router.post('/listar/assistencias_liga', ListarTudoController.assistenciasLiga );
+router.post('/listar/assistencias_time', ListarTudoController.assistenciasTime );
+router.post('/listar/assistencias_posicao', ListarTudoController.assistenciasPosicao );
+
 //Pontos de torneio
 router.post('/pontos_torneio/listar_torneio', PontosTorneioController.listar_torneio );
 router.post('/pontos_torneio/criar_torneio', PontosTorneioController.criar_torneio );

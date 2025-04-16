@@ -81,6 +81,39 @@ module.exports = {
         return res.json(json.result)
     },
 
+
+    async assistenciasPais(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let futebol = await ListarTimesJogadoresModal.assistenciasPais();
+            json.result = futebol
+        return res.json(json.result)
+    },
+
+    async assistenciasLiga(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let futebol = await ListarTimesJogadoresModal.assistenciasLiga();
+            json.result = futebol
+        return res.json(json.result)
+    },
+
+    async assistenciasTime(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let futebol = await ListarTimesJogadoresModal.assistenciasTime();
+            json.result = futebol
+        return res.json(json.result)
+    },
+    async assistenciasPosicao(req, res) {
+        // verifyJWT(req, res)
+        let json = { error: '', result: [] };
+        let futebol = await ListarTimesJogadoresModal.assistenciasPosicao();
+            json.result = futebol
+        return res.json(json.result)
+    },
+
+
     async listarDono(req, res) {
         // verifyJWT(req, res)
         let json = { error: '', result: [] };

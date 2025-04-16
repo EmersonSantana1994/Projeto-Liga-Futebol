@@ -64,6 +64,108 @@ module.exports = {
             })
         });
     },
+
+    golsPais: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('select SUM(a.gols) As Gols , j.pais As Pais from jogadores j \
+            left join artilheiro a on j.id_jogador = a.id_jogador \
+            GROUP BY j.pais ORDER BY SUM(a.gols) DESC;', (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+    golsLiga: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('select SUM(a.gols) As Gols, l.nome from jogadores j \
+            left join times_tb t on t.id_time = j.id_time \
+            left join ligas l on l.id = t.id_liga \
+            left join artilheiro a on j.id_jogador = a.id_jogador \
+            GROUP BY l.nome ORDER BY SUM(a.gols) DESC;', (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+    golsTime: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('select SUM(a.gols) As Gols, t.nome from jogadores j \
+            left join times_tb t on t.id_time = j.id_time \
+            left join ligas l on l.id = t.id_liga \
+            left join artilheiro a on j.id_jogador = a.id_jogador \
+            GROUP BY t.nome ORDER BY SUM(a.gols) DESC;', (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+    golsPosicao: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('select SUM(a.gols) As Gols, j.posicao from jogadores j \
+            left join times_tb t on t.id_time = j.id_time \
+            left join ligas l on l.id = t.id_liga \
+            left join artilheiro a on j.id_jogador = a.id_jogador \
+            GROUP BY j.posicao ORDER BY SUM(a.gols) DESC;', (error, results) => {
+                if(error) { rejeitado(error); return; }
+               //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(results);    
+            })
+        });
+    },
+
+    assistenciasPais: (nome) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('select SUM(a.assistencias) As Assistencias , j.pais As Pais from jogadores j \
+            left join assistencia a on j.id_jogador = a.id_jogador \
+            GROUP BY j.pais ORDER BY SUM(a.assistencias) DESC;', (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    
+    assistenciasLiga: (nome) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('select SUM(a.assistencias) As Assistencias, l.nome from jogadores j \
+            left join times_tb t on t.id_time = j.id_time \
+            left join ligas l on l.id = t.id_liga \
+            left join assistencia a on j.id_jogador = a.id_jogador \
+            GROUP BY l.nome ORDER BY SUM(a.assistencias) DESC;', (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    
+    assistenciasTime: (nome) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('select SUM(a.assistencias) As Assistencias, t.nome from jogadores j \
+            left join times_tb t on t.id_time = j.id_time \
+            left join ligas l on l.id = t.id_liga \
+            left join assistencia a on j.id_jogador = a.id_jogador \
+            GROUP BY t.nome ORDER BY SUM(a.assistencias) DESC;', (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    
+    assistenciasPosicao: (nome) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('select SUM(a.assistencias) As Assistencias, j.posicao from jogadores j \
+            left join times_tb t on t.id_time = j.id_time \
+            left join ligas l on l.id = t.id_liga \
+            left join assistencia a on j.id_jogador = a.id_jogador \
+            GROUP BY j.posicao ORDER BY SUM(a.assistencias) DESC;', (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    
     listarDono: () => {
         return new Promise((aceito, rejeitado)=>{
             db.query('select j.nome As dono, t.nome As time, l.nome As liga from  jogadores j \
