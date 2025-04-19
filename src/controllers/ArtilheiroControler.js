@@ -30,6 +30,51 @@ module.exports = {
         return res.json(json.result)
     },
 
+    async atualizarGols(req, res) {
+        let json = { error: '', result: {} };
+
+    
+          let todosArtilheiro = await ArtilheiroModel.buscarJogador(req.body.nome);
+
+        if(todosArtilheiro.length == 0){
+
+            let inserir 
+            let json = { error: '', result: {} };
+    
+            let dados = { gols: req.body.gols, nome: req.body.nome  }
+            let buscarIdJogador =  await ArtilheiroModel.buscarJogadorTabela(req.body.nome);
+            if(buscarIdJogador.length == 0){
+                return res.status(500).send('Jogador não cadastrado na tebla de jogadores')
+            }else{
+                inserir = await ArtilheiroModel.inserirPontos(dados, buscarIdJogador[0].id_jogador);
+                await ArtilheiroModel.inserirPontosTorneio(dados, req.body.gols );
+                if (inserir) {
+                    json.result = inserir; //se tiver nota ele joga no json
+                }
+                return res.json(json)
+            }
+            
+        } else{
+            let dados = {id: todosArtilheiro[0].id, gols: todosArtilheiro[0].gols + 1, nome: todosArtilheiro[0].nome  }
+            let inserir = await ArtilheiroModel.atualizaPontos(dados);
+            let buscarJogadorTorneio = await ArtilheiroModel.buscarJogadorTorneio(req.body.nome);
+            if(buscarJogadorTorneio.length > 0){
+             let atualiza =  req.body.gols_torneio + buscarJogadorTorneio[0].gols  
+                await ArtilheiroModel.atualizaPontosToneio(dados, atualiza);
+            }else{
+                await ArtilheiroModel.inserirPontosTorneio(dados, req.body.gols_torneio);
+            }
+            
+            if (inserir) {  
+                json.result = inserir; //se tiver nota ele joga no json
+            }
+            return res.json(json)
+
+        }
+
+       
+    },
+
     async buscarJogador(req, res) {
         // verifyJWT(req, res)
         let json = { error: '', result: [] };
@@ -72,7 +117,6 @@ module.exports = {
             `,
           }, { headers });
           const data = response.data;
-          console.log("lllll", data.data )
           resposta = data.data;
         } catch (error) {
           console.error('Erro ao fazer a requisição GraphQL:', error);
@@ -101,6 +145,13 @@ module.exports = {
 
     async atualizaPontos(req, res) {
         let json = { error: '', result: {} };
+
+    
+          let todosArtilheiro = await ArtilheiroModel.buscarJogador(req.body.nome);
+
+        if(todosArtilheiro.buscarIdJogador.length == 0){
+            return res.status(500).send('Jogador não cadastrado na tebla de jogadores')
+        }
 
         let dados = {id: req.body.id, gols: req.body.gols, nome: req.body.nome  }
             let inserir = await ArtilheiroModel.atualizaPontos(dados);
