@@ -34,7 +34,7 @@ module.exports = {
 
     buscar: (nome) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('SELECT j.nome As jogador, l.nome As liga, t.nome As time FROM times_tb t \
+            db.query('SELECT j.nome As jogador, l.nome As liga, t.nome As time, t.escudo As escudo FROM times_tb t \
             left join jogadores j on t.id_time = j.id_time \
             left join ligas l on t.id_liga = l.id \
             where t.nome = ? order by j.dono Desc; ', [nome], (error, results) => {

@@ -84,7 +84,7 @@ module.exports = {
     
     times_tb: (nome) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('CREATE TABLE IF NOT EXISTS times_tb(id_time bigint unsigned not null AUTO_INCREMENT, nome varchar(255), id_liga bigint unsigned not null, index liga_time_index(id_liga), foreign key (id_liga) references ligas(id) on delete cascade, PRIMARY KEY(id_time));', [], (error, results) => {
+            db.query('CREATE TABLE IF NOT EXISTS times_tb(id_time bigint unsigned not null AUTO_INCREMENT, nome varchar(255), escudo varchar(700), id_liga bigint unsigned not null, index liga_time_index(id_liga), foreign key (id_liga) references ligas(id) on delete cascade, PRIMARY KEY(id_time));', [], (error, results) => {
                 if(error) { rejeitado(error); return; }
                //vai verificar se retornou mais de 1 e pegar o 1
                     aceito(results);    
