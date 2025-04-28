@@ -155,6 +155,8 @@ router.post('/copa/limpar', CopaCotroller.limpar );
 router.post('/placar/inserir', PlacarController.inserir );
 router.post('/placar/bucartodos', PlacarController.buscarTodos );
 router.post('/placar/limpar', PlacarController.limpar );
+router.post('/placar/limparEspecificoArtilheiro', PlacarController.limparEspecificoArtilheiro );
+router.post('/placar/limparEspecificoAssistencia', PlacarController.limparEspecificoAssistencia );
 router.post('/placar/email', PlacarController.email );
 
 //TitulosJogadoresTorneio

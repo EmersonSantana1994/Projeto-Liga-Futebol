@@ -6,6 +6,7 @@ const axios = require('axios');
 let cript = false
 const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
+const { buscar } = require('./ProntuarioCadastrarController');
 
 
 
@@ -148,6 +149,83 @@ module.exports = {
             if(inserir1){
                     json.result = inserir1; //se tiver nota ele joga no json     
             }
+           
+            return res.json(json)
+    },
+
+    async limparEspecificoArtilheiro(req, res) {
+        let inserir1
+        let nome = req.body.nome
+        let json = { error: '', result: {} };
+      
+            let buscarJogadorArtilheiro = await PlacarModel.buscarJogadorTabelaArtilheiro(nome);
+        if (buscarJogadorArtilheiro.length == 0) {
+            return res.status(500).send('Jogador se encontra na tabela de artilheiro')
+        }
+
+        let buscarJogadorArtilheiroTorneio = await PlacarModel.buscarJogadorTabelaArtilheiroTorneio(nome);
+
+            if(buscarJogadorArtilheiro[0].gols > 0){
+                let atualizar = buscarJogadorArtilheiro[0].gols - 1
+                let atualizarTorneio = buscarJogadorArtilheiroTorneio[0].gols - 1
+                inserir1 = await PlacarModel.excluirGolArtilheiro(atualizar, buscarJogadorArtilheiro[0].nome);
+                await PlacarModel.excluirGolArtilheiroTorneio(atualizarTorneio, buscarJogadorArtilheiroTorneio[0].nome);
+            }else{
+                inserir1 =  await PlacarModel.excluirJogadorArtilheiro(nome);
+                await PlacarModel.excluirJogadorArtilheiroTorneio(nome);
+            }
+
+            let time = await PlacarModel.buscarTimeJogador(nome);
+
+            let verificarTime = await PlacarModel.verificarTime(time[0].nome);
+            if (verificarTime[0]?.placar > 0) {
+                let menosumgol = verificarTime[0].placar - 1
+                if(menosumgol == 0){
+                    inserir1 = await PlacarModel.deletarTimePlacar(time[0].nome);
+                }
+                inserir1 = await PlacarModel.atualiza(time[0].nome, menosumgol);
+            }else{
+                inserir1 = await PlacarModel.deletarTimePlacar(time[0].nome);
+            }
+
+         
+        if(inserir1){
+            json.result = inserir1; //se tiver nota ele joga no json     
+    }
+
+           
+            return res.json(json)
+    },
+
+
+
+    async limparEspecificoAssistencia(req, res) {
+        let inserir1
+        let nome = req.body.nome
+        let json = { error: '', result: {} };
+      
+            let buscarJogadorArtilheiro = await PlacarModel.buscarJogadorTabelaAssistencia(nome);
+        if (buscarJogadorArtilheiro.length == 0) {
+            return res.status(500).send('Jogador se encontra na tabela de assistencia')
+        }
+
+        let buscarJogadorArtilheiroTorneio = await PlacarModel.buscarJogadorTabelaAssistenciaTorneio(nome);
+
+            if(buscarJogadorArtilheiro[0].assistencias > 0){
+                let atualizar = buscarJogadorArtilheiro[0].assistencias - 1
+                let atualizarTorneio = buscarJogadorArtilheiroTorneio[0].assistencias - 1
+                inserir1 = await PlacarModel.excluirGolAssistencia(atualizar, buscarJogadorArtilheiro[0].nome);
+                await PlacarModel.excluirGolAssistenciaTorneio(atualizarTorneio, buscarJogadorArtilheiroTorneio[0].nome);
+            }else{
+                inserir1 =  await PlacarModel.excluirJogadorAssistencia(nome);
+                await PlacarModel.excluirJogadorAssistenciaTorneio(nome);
+            }
+
+         
+        if(inserir1){
+            json.result = inserir1; //se tiver nota ele joga no json     
+    }
+
            
             return res.json(json)
     },
