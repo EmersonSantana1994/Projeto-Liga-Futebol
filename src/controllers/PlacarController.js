@@ -224,8 +224,16 @@ module.exports = {
             if(buscarJogadorArtilheiro[0].assistencias > 0){
                 let atualizar = buscarJogadorArtilheiro[0].assistencias - 1
                 let atualizarTorneio = buscarJogadorArtilheiroTorneio[0].assistencias - 1
-                inserir1 = await PlacarModel.excluirGolAssistencia(atualizar, buscarJogadorArtilheiro[0].nome);
-                await PlacarModel.excluirGolAssistenciaTorneio(atualizarTorneio, buscarJogadorArtilheiroTorneio[0].nome);
+                if(atualizarTorneio == 0){
+                    await PlacarModel.excluirJogadorAssistenciaTorneio(nome);
+                }else{
+                    inserir1 = await PlacarModel.excluirGolAssistenciaTorneio(atualizar, buscarJogadorArtilheiro[0].nome);
+                }
+                if(atualizar == 0){
+                    await PlacarModel.excluirJogadorAssistencia(nome);
+                }else{
+                    inserir1 = await PlacarModel.excluirGolAssistencia(atualizar, buscarJogadorArtilheiro[0].nome);
+                }
             }else{
                 inserir1 =  await PlacarModel.excluirJogadorAssistencia(nome);
                 await PlacarModel.excluirJogadorAssistenciaTorneio(nome);
