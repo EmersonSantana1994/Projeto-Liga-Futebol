@@ -165,6 +165,10 @@ module.exports = {
 
         let buscarJogadorArtilheiroTorneio = await PlacarModel.buscarJogadorTabelaArtilheiroTorneio(nome);
 
+        if (buscarJogadorArtilheiroTorneio.length == 0) {
+            return res.status(500).send('Jogador não se encontra na tabela de artilheiro deste torneio')
+        }
+
             if(buscarJogadorArtilheiro[0].gols > 0){
                 let atualizar = buscarJogadorArtilheiro[0].gols - 1
                 let atualizarTorneio = buscarJogadorArtilheiroTorneio[0].gols - 1
