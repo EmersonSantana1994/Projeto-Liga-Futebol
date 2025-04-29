@@ -216,10 +216,14 @@ module.exports = {
       
             let buscarJogadorArtilheiro = await PlacarModel.buscarJogadorTabelaAssistencia(nome);
         if (buscarJogadorArtilheiro.length == 0) {
-            return res.status(500).send('Jogador se encontra na tabela de assistencia')
+            return res.status(500).send('Jogador não se encontra na tabela de assistencia')
         }
 
         let buscarJogadorArtilheiroTorneio = await PlacarModel.buscarJogadorTabelaAssistenciaTorneio(nome);
+
+        if (buscarJogadorArtilheiroTorneio.length == 0) {
+            return res.status(500).send('Jogador não se encontra na tabela de assistencia deste torneio')
+        }
 
             if(buscarJogadorArtilheiro[0].assistencias > 0){
                 let atualizar = buscarJogadorArtilheiro[0].assistencias - 1
