@@ -168,8 +168,17 @@ module.exports = {
             if(buscarJogadorArtilheiro[0].gols > 0){
                 let atualizar = buscarJogadorArtilheiro[0].gols - 1
                 let atualizarTorneio = buscarJogadorArtilheiroTorneio[0].gols - 1
-                inserir1 = await PlacarModel.excluirGolArtilheiro(atualizar, buscarJogadorArtilheiro[0].nome);
-                await PlacarModel.excluirGolArtilheiroTorneio(atualizarTorneio, buscarJogadorArtilheiroTorneio[0].nome);
+                if(atualizarTorneio == 0){
+                    await PlacarModel.excluirJogadorArtilheiroTorneio(nome);
+                }else{
+                    inserir1 = await PlacarModel.excluirGolArtilheiroTorneio(atualizar, buscarJogadorArtilheiro[0].nome);
+                }
+                if(atualizar == 0){
+                    await PlacarModel.excluirJogadorArtilheiro(nome);
+                }else{
+                    inserir1 = await PlacarModel.excluirGolArtilheiro(atualizar, buscarJogadorArtilheiro[0].nome);
+                }
+                
             }else{
                 inserir1 =  await PlacarModel.excluirJogadorArtilheiro(nome);
                 await PlacarModel.excluirJogadorArtilheiroTorneio(nome);
@@ -182,8 +191,9 @@ module.exports = {
                 let menosumgol = verificarTime[0].placar - 1
                 if(menosumgol == 0){
                     inserir1 = await PlacarModel.deletarTimePlacar(time[0].nome);
+                }else{
+                    inserir1 = await PlacarModel.atualiza(time[0].nome, menosumgol);
                 }
-                inserir1 = await PlacarModel.atualiza(time[0].nome, menosumgol);
             }else{
                 inserir1 = await PlacarModel.deletarTimePlacar(time[0].nome);
             }
