@@ -5,7 +5,7 @@ module.exports = {
 
     buscarTodos: () => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('SELECT * FROM ranking_titulos order by total', (error, results)=>{
+            db.query('SELECT * FROM ranking_titulos order by total Desc', (error, results)=>{
                 if(error) { rejeitado(error); return; }
                 aceito(results);
             });
