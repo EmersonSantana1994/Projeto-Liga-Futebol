@@ -3,7 +3,7 @@ const db = require('../db');
 module.exports = {
     listarTudo: (nome) => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('SELECT j.id_jogador as id, j.nome as Jogador, t.nome as Time, l.nome As Liga, a.gols, ass.assistencias, j.pais, j.posicao FROM jogadores j \
+            db.query('SELECT j.id_jogador as id, j.nome as Jogador, t.nome as Time, l.nome As Liga, a.gols, ass.assistencias, (COALESCE(a.gols, 0) + COALESCE(ass.assistencias, 0)) AS participacoesDeGols, j.pais, j.posicao FROM jogadores j \
             left join times_tb t on j.id_time = t.id_time left join ligas l on t.id_liga = l.id \
             left join artilheiro a on a.id_jogador = j.id_jogador \
             left join assistencia ass on ass.id_jogador = j.id_jogador order by a.gols desc, ass.assistencias desc',
