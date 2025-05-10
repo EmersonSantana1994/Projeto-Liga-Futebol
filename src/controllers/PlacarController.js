@@ -235,7 +235,7 @@ module.exports = {
                 if(atualizarTorneio == 0){
                     await PlacarModel.excluirJogadorAssistenciaTorneio(nome);
                 }else{
-                    inserir1 = await PlacarModel.excluirGolAssistenciaTorneio(atualizar, buscarJogadorArtilheiro[0].nome);
+                    inserir1 = await PlacarModel.excluirGolAssistenciaTorneio(atualizarTorneio, buscarJogadorArtilheiro[0].nome);
                 }
                 if(atualizar == 0){
                     await PlacarModel.excluirJogadorAssistencia(nome);
